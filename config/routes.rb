@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'projects#index'
-  get 'projects/index'
+  get 'projects' => 'projects#index'
 
   post 'projects/post_new' => 'projects#post_new'
 

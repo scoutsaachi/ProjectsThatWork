@@ -12,9 +12,7 @@ class UpdateProjects < ActiveRecord::Migration
         add_column :projects, :project_goal, :string
         add_column :projects, :project_activity, :string
         add_column :projects, :project_recipient, :string
-
         add_column :projects, :num_students, :int
-        add_column :projects, :activity, :string
 
         add_column :projects, :start_date, :datetime
         add_column :projects, :end_date, :datetime
