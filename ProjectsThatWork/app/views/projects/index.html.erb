@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+    <div>
+        <!--TODO: Factor this out as an html snippet to be inserted in all pages -->
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">Projects That Work</a> <!-- TODO: Link to HomePage -->
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/projects">Create Project<span class="sr-only">(current)</span></a></li>
+                <ul>
+            </div>
+        </nav>
+
+        <%= form_tag({controller: "projects", action: "post_new"}, :method => "post") do %>
+            <div id="main-container" class="container-fluid">
+                <div class="row">
+                    <div>
+                        <div class="col-md-3">
+                            <%= label_tag(:school_name, "School Name:") %>
+                            <%= text_field_tag(:school_name) %>
+                        </div>
+                        <div class="col-md-3">
+                            <%= label_tag(:town_name, "Town Name:") %>
+                            <%= text_field_tag(:town_name) %>
+                        </div>
+                        <div class="col-md-3">
+                            <%= label_tag(:course_name, "Course Name:") %>
+                            <%= text_field_tag(:course_name) %>
+                        </div>
+                        <div class="col-md-3">
+                            <%= label_tag(:grade_level, "Grade Level:") %>
+                            <%= text_field_tag(:grade_level) %>  
+                        </div>
+                    </div>
+                </div>
+
+                <div class"row">
+                    <div>
+                        <div class="col-md-6">
+                            <%= label_tag(:project_goal, "Project Goal:") %> 
+                            <%= text_area_tag(:project_goal) %>    
+                        </div>
+                        <div class="col-md-6">
+                            <%= label_tag(:project_activity, "Project Activity:") %> 
+                            <%= text_area_tag(:project_activity) %>    
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div>
+                        <div class="col-md-3">
+                            <%= label_tag(:project_recipient, "Project Recipient") %> 
+                            <%= text_field_tag(:project_recipient) %>    
+                        </div>
+                        <div class="col-md-3">
+                            <%= label_tag(:num_students, "Number of Students:") %> 
+                            <%= text_field_tag(:num_students) %>     
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div>
+                        <div class="col-md-3">
+                             <%= label_tag(:start_date, "Start Date:") %> 
+                             <%= text_field_tag(:start_date) %>   
+                        </div>
+                        <div class="col-md-3">
+                             <%= label_tag(:end_date, "End Date:") %> 
+                             <%= text_field_tag(:end_date) %>       
+                        </div>
+                        <div class="col-md-3">
+                             <%= label_tag(:num_days, "Duration(Days):") %> 
+                             <%= text_field_tag(:num_days) %>      
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div> <%= submit_tag("Submit", {class: "btn btn-primary"})%> </div>
+        <% end %>
+
+    </div>
+
+</body>
+
+</html>
+
+
+<!--         add_column :projects, :project_goal, :string
+        add_column :projects, :project_activity, :string
+        add_column :projects, :project_recipient, :string
+
+        add_column :projects, :num_students, :int
+        add_column :projects, :activity, :string
+
+        add_column :projects, :start_date, :datetime
+        add_column :projects, :end_date, :datetime
+        add_column :projects, :num_days, :int
+
+        # Please Note: The following columns are strings
+        # that must be parsed via a specified delimiter
+        # in order to extract its individual components
+        add_column :projects, :materials_and_costs, :string
+        add_column :projects, :learning_goals, :string
+        add_column :projects, :community_partners, :string
+        add_column :projects, :steps, :string
+ -->
