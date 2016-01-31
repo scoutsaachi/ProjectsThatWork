@@ -43,7 +43,6 @@ ActiveRecord::Schema.define(version: 20160125032109) do
     t.string   "project_activity"
     t.string   "project_recipient"
     t.integer  "num_students"
-    t.string   "activity"
     t.datetime "start_date"
     t.datetime "end_date"
     t.integer  "num_days"

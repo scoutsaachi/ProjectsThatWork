@@ -5,66 +5,91 @@
 </head>
 
 <body>
+    <div>
+        <!--TODO: Factor this out as an html snippet to be inserted in all pages -->
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">Projects That Work</a> <!-- TODO: Link to HomePage -->
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/projects">Create Project<span class="sr-only">(current)</span></a></li>
+                <ul>
+            </div>
+        </nav>
+
+        <%= form_tag({controller: "projects", action: "post_new"}, :method => "post") do %>
+            <div id="main-container" class="container-fluid">
+                <div class="row">
+                    <div>
+                        <div class="col-md-3">
+                            <%= label_tag(:school_name, "School Name:") %>
+                            <%= text_field_tag(:school_name) %>
+                        </div>
+                        <div class="col-md-3">
+                            <%= label_tag(:town_name, "Town Name:") %>
+                            <%= text_field_tag(:town_name) %>
+                        </div>
+                        <div class="col-md-3">
+                            <%= label_tag(:course_name, "Course Name:") %>
+                            <%= text_field_tag(:course_name) %>
+                        </div>
+                        <div class="col-md-3">
+                            <%= label_tag(:grade_level, "Grade Level:") %>
+                            <%= text_field_tag(:grade_level) %>  
+                        </div>
+                    </div>
+                </div>
+
+                <div class"row">
+                    <div>
+                        <div class="col-md-6">
+                            <%= label_tag(:project_goal, "Project Goal:") %> 
+                            <%= text_area_tag(:project_goal) %>    
+                        </div>
+                        <div class="col-md-6">
+                            <%= label_tag(:project_activity, "Project Activity:") %> 
+                            <%= text_area_tag(:project_activity) %>    
+                        </div>
+                    </div>
+                </div>
 
 
-<div>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"></button>
-          <a class="navbar-brand" href="#">Projects That Work</a>
-        </div>
-    </nav>
+                <div class="row">
+                    <div>
+                        <div class="col-md-3">
+                            <%= label_tag(:project_recipient, "Project Recipient") %> 
+                            <%= text_field_tag(:project_recipient) %>    
+                        </div>
+                        <div class="col-md-3">
+                            <%= label_tag(:num_students, "Number of Students:") %> 
+                            <%= text_field_tag(:num_students) %>     
+                        </div>
+                    </div>
+                </div>
 
-    <%= form_tag({controller: "projects", action: "post_new"}, :method => "post") do %>
-    <div id="main-container" class="container-fluid">
-      <div class="row">
-        <div id="content">
-            <div class="col-md-3">
-                <%= label_tag(:school_name, "Enter your school name:") %>
-                <%= text_field_tag(:school_name) %>
+                <div class="row">
+                    <div>
+                        <div class="col-md-3">
+                             <%= label_tag(:start_date, "Start Date:") %> 
+                             <%= text_field_tag(:start_date) %>   
+                        </div>
+                        <div class="col-md-3">
+                             <%= label_tag(:end_date, "End Date:") %> 
+                             <%= text_field_tag(:end_date) %>       
+                        </div>
+                        <div class="col-md-3">
+                             <%= label_tag(:num_days, "Duration(Days):") %> 
+                             <%= text_field_tag(:num_days) %>      
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-3">
-                <%= label_tag(:town_name, "Enter your town name:") %>
-                <%= text_field_tag(:town_name) %>
-            </div>
-            <div class="col-md-3">
-            <%= label_tag(:course_name, "Enter your course name:") %>
-            <%= text_field_tag(:course_name) %>
-            </div>
-            <div class="col-md-3">
-            <%= label_tag(:grade_level, "Enter your grade level:") %>
-            <%= text_field_tag(:grade_level) %>  
-            </div>
-        </div>
-      </div>
+            <div> <%= submit_tag("Submit", {class: "btn btn-primary"})%> </div>
+        <% end %>
+
     </div>
-
-
-        <p> <%= label_tag(:project_goal, "Enter your project goal:") %> </p>
-        <p> <%= text_field_tag(:project_goal) %> </p>   
-        <p> <%= label_tag(:project_activity, "Enter your project activity:") %> </p>
-        <p> <%= text_field_tag(:project_activity) %> </p>   
-        <p> <%= label_tag(:project_recipient, "Enter your project recipient:") %> </p>
-        <p> <%= text_field_tag(:project_recipient) %> </p>   
-
-        <p> <%= label_tag(:num_students, "Enter the number of students that particpated:") %> </p>
-        <p> <%= text_field_tag(:num_students) %> </p>   
-        <p> <%= label_tag(:activity, "Activity:") %> </p>
-        <p> <%= text_field_tag(:activity) %> </p>   
-
-        <p> <%= label_tag(:start_date, "Start Date:") %> </p>
-        <p> <%= text_field_tag(:start_date) %> </p>   
-        <p> <%= label_tag(:end_date, "End Date:") %> </p>
-        <p> <%= text_field_tag(:end_date) %> </p>     
-        <p> <%= label_tag(:num_days, "Duration(Days):") %> </p>
-        <p> <%= text_field_tag(:num_days) %> </p> 
-
-        <p> <%= submit_tag("Submit") %> </p>
-    <% end %>
-
-</div>
 
 </body>
 
