@@ -1,7 +1,11 @@
 class CreateStudentReviews < ActiveRecord::Migration
   def change
     create_table :student_reviews do |t|
-	  t.string :school
+      t.integer :learning_score
+      t.integer :participate_in_future_projects
+      t.string :participants
+      t.string :planning_score
+      t.string :gender
       t.timestamps null: false
     end
   end

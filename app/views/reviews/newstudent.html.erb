@@ -7,8 +7,6 @@
 	<p> <%= select_tag(:learning_effectiveness, "<option value='1'>1 Nothing At All</option><option value='2'>2 A Little</option><option value='3'>3 Some</option><option value='4'>4 A Lot</option><option value='5'>5 Everything</option>".html_safe) %> </p>
 	<p> <%= label_tag(:participate_in_future_projects, "To continue to address the issue or problem, would you participate in future projects like this?") %> </p>
 	<p> <%= select_tag(:participate_in_future_projects, "<option value='1'>1 No Chance</option><option value='2'>2 Probably Not</option><option value='3'>3 Maybe Will or Will Not</option><option value='4'>4 Probably Will</option><option value='5'>5 Definitely Will</option>".html_safe) %> </p>
-	<p> <%= label_tag(:course_name, "Enter the course name:") %> </p>
-	<p> <%= text_field_tag(:course_name) %> </p>
 
 	<p> <%= label_tag(:participants, "Who else participated in this project (Check all that apply)?") %> </p>
 	<p> <%= check_box_tag 'participants[]' "Alone" %> Alone, by yourself </p>

@@ -1,0 +1,12 @@
+<ul>
+<% @categories.each do |category| %>
+	<li> <%= link_to category.category_name, controller: "projects", action: "display_category", id: category.id %> </li>
+<% end %>
+</ul>
+
+<%= form_tag({:controller => "projects", :action => "post_newcategory"}, :method => "post") do %>
+<%= label_tag(:category_name, "Create new Category:") %>
+<%= text_field_tag(:category_name) %>
+<%= submit_tag("Submit", {class: "btn btn-primary"})%>
+
+<% end %>

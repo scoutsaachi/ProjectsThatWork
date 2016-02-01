@@ -1,0 +1,43 @@
+<p> Create a new instance of the Project <%= @project.name %> </p>
+
+<%= form_tag({:controller => "projects", :action => "post_newinstance", :id  => params[:id]}, :method => "post") do %>
+
+	<p> <%= label_tag(:school_name, "Enter the school name:") %> </p>
+	<p> <%= text_field_tag(:school_name) %> </p>
+	<p> <%= label_tag(:course, "Enter the course name:") %> </p>
+	<p> <%= text_field_tag(:course) %> </p>
+	<p> <%= label_tag(:grade_level, "Enter the grade level of the students:") %> </p>
+	<p> <%= number_field_tag(:grade_level, nil, in: 1...12) %> </p>
+	<p> <%= label_tag(:grade_level, "Enter the grade level of the students:") %> </p>
+	<p> <%= number_field_tag(:grade_level, nil, in: 1...12) %> </p>
+	<p> <%= label_tag(:number_of_students, "Enter the number of students:") %> </p>
+	<p> <%= number_field_tag(:number_of_students) %> </p>
+
+	<p> <%= label_tag(:start_date, "Enter the start date:") %> </p>
+	<p> <%= date_field(:start_date) %> </p>
+
+	<p> <%= label_tag(:end_date, "Enter the start date:") %> </p>
+	<p> <%= date_field(:end_date) %> </p>
+
+	<p> <%= label_tag(:cost, "List all of the costs associated with this project:") %> </p>
+	<p> <%= text_area_tag(:cost, nil, size: "30x5") %> </p>
+
+	<p> <%= label_tag(:learning_standards, "List each of the educational learning standards and other goals for students intended to be covered by the project:") %> </p>
+
+	<p> <%= label_tag(:participation, "Did any individuals from community organizations participate in the project:") %> </p>
+	<p> <%= select_tag(:participation, "<option>Yes</option><option>No</option>".html_safe) %> </p>
+
+	<p> <%= label_tag(:project_name, "If so, list them:") %> </p>
+	<p> <%= text_field_tag(:project_name) %> </p>
+
+	<p> <%= label_tag(:steps, "Describe the steps taken in this project:") %> </p>
+	<p> <%= text_area_tag(:steps, nil, size: "30x5") %> </p>
+
+	<p> <%= label_tag(:preparation, "Describe how the students prepared for this project:") %> </p>
+	<p> <%= text_area_tag(:preparation, nil, size: "30x5") %> </p>
+
+	<p> <%= label_tag(:cost, "What reflection activities were done to conclude the project:") %> </p>
+	<p> <%= text_area_tag(:cost, nil, size: "30x5") %> </p>
+
+	<p> <%= submit_tag("Submit") %> </p>
+<% end %>
