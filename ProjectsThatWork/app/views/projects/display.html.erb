@@ -1,3 +1,21 @@
-<% @project.attributes.each_pair do |name, value| %>
-  <p><%= name %> = <%= value %></p>
+<div class="page-header">
+	<h1><%= @project.project_name %> </h1>
+</div>
+<p class="lead"><%= @project.description %></p>
+
+<p> Subject: <%= @project.course_subject %> </p>
+<p> Expected Difficulty: <%= @project.expected_difficulty %> </p>
+<p> Expected duration: <%= @project.duration %> </p>
+
+<% if @project.project_instances.size == 0 %>
+	<p> There are no examples of this project </p>
+<% else %>
+	<p> Current examples of this project include </p>
+	<ul>
+		<% @project.project_instances.each do |pi| %>
+			<li> <%= pi.school %>, <%= pi.town %> </li>
+		<% end %>
+	</ul>
 <% end %>
+
+<p> <%= link_to "Create a new Instance of this Project", controller: "projects", action: "new_instance", id: @project.id %> </p>
