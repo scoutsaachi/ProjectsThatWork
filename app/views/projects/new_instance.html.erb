@@ -1,4 +1,4 @@
-<p> Create a new instance of the Project <%= @project.name %> </p>
+<p> Create a new instance of the Project <%= @project.project_name %> </p>
 
 <%= form_tag({:controller => "projects", :action => "post_newinstance", :id  => params[:id]}, :method => "post") do %>
 
@@ -14,10 +14,10 @@
 	<p> <%= number_field_tag(:number_of_students) %> </p>
 
 	<p> <%= label_tag(:start_date, "Enter the start date:") %> </p>
-	<p> <%= date_field(:start_date) %> </p>
+	<p> <%= date_field_tag(:start_date) %> </p>
 
 	<p> <%= label_tag(:end_date, "Enter the start date:") %> </p>
-	<p> <%= date_field(:end_date) %> </p>
+	<p> <%= date_field_tag(:end_date) %> </p>
 
 	<p> <%= label_tag(:cost, "List all of the costs associated with this project:") %> </p>
 	<p> <%= text_area_tag(:cost, nil, size: "30x5") %> </p>
