@@ -1,0 +1,7 @@
+<p> <%= @category.category_name %> </p>
+<ul>
+<% @category.projects.each do |project| %>
+	<li> <%= link_to project.project_name, controller: "projects", action: "display", id: project.id %> </li>
+<% end %>
+</ul>
+<p> <%= link_to "Create New Project", controller: "projects", action: "new", id: @category.id %> </p>

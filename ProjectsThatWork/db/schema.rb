@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160110221408) do
+ActiveRecord::Schema.define(version: 20160131231011) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "category_name"
@@ -25,61 +25,74 @@ ActiveRecord::Schema.define(version: 20160110221408) do
   end
 
   create_table "organization_reviews", force: :cascade do |t|
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
     t.integer  "impact"
     t.integer  "participate_in_future_projects"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  create_table "project_instances", force: :cascade do |t|
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.string   "school"
+    t.string   "town"
+    t.string   "course"
+    t.integer  "grade_level"
+    t.integer  "number_of_students"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string   "materials_and_costs"
+    t.string   "learning_goals"
+    t.boolean  "community_participation"
+    t.string   "community_partners"
+    t.string   "steps"
+    t.string   "preparation"
+    t.string   "reflection_activities"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "projects", force: :cascade do |t|
     t.string   "project_name"
-    t.float    "difficulty"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.string   "course_subject"
+    t.string   "description"
+    t.string   "expected_difficulty"
+    t.integer  "duration"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "actable_id"
     t.string   "actable_type"
-    t.integer  "project_id"
-    t.integer  "user_id"
     t.string   "review_text"
     t.integer  "rating"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
     t.integer  "feasibility"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "project_id"
+    t.integer  "project_instance_id"
   end
 
   create_table "student_reviews", force: :cascade do |t|
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
     t.integer  "learning_score"
     t.integer  "participate_in_future_projects"
     t.string   "participants"
-    t.integer  "planning_score"
+    t.string   "planning_score"
     t.string   "gender"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "teacher_reviews", force: :cascade do |t|
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.string   "course_name"
-    t.integer  "grade_level"
-    t.integer  "number_of_students"
-    t.boolean  "community_participation"
-    t.string   "description"
-    t.integer  "duration"
-    t.string   "preparation"
-    t.string   "learning_standards"
-    t.string   "cost"
-    t.string   "reflection"
     t.integer  "learning_effectiveness"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "users", force: :cascade do |t|
     t.string   "user_email"
     t.string   "user_name"
-    t.string   "user_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
