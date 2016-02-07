@@ -1,21 +1,99 @@
 <div class="page-header">
-	<h1><%= @project.project_name %> </h1>
+	<h1>Project: <%= @project.project_name %> </h1>
 </div>
-<p class="lead"><%= @project.description %></p>
 
-<p> Subject: <%= @project.course_subject %> </p>
-<p> Expected Difficulty: <%= @project.expected_difficulty %> </p>
-<p> Expected duration: <%= @project.duration %> </p>
+<div class="jumbotron" style = "background:#F8F8F8;text-align:center">
+    <h1><%= @project.project_name %></h1>
+    <h2><%= @project.description %></h2>
+    <br>
 
-<% if @project.project_instances.size == 0 %>
-	<p> There are no examples of this project </p>
-<% else %>
-	<p> Current examples of this project include </p>
-	<ul>
+    <div class="row">
+  		<div class="col-md-4"><p><strong>Subject:</strong> <%= @project.course_subject %></p></div>
+  		<div class="col-md-4"><p><strong>Expected Difficulty:</strong> <%= @project.expected_difficulty %></p></div>
+  		<div class="col-md-4"><p><strong>Expected duration: </strong><%= @project.duration %></p></div>
+	</div>
+	<div class="row">
+  		<div class="col-md-4"><p><strong>Project Instances:</strong> <%= @project.project_instances.size %></p></div>
+  		<div class="col-md-4"><p><strong>Categories:</strong> 
+  		<% @project.categories.each do |category| %>
+  			<%= link_to category.category_name, controller: "projects", action: "display_category", id: category.id %> 
+  		<%end%> </p></div>
+  		<div class="col-md-4"><p><strong>Rating: </strong> Not Implemented Yet</p></div>
+	</div>
+ </div>
+
+
+<% if @project.project_instances.size != 0 %>
+	<h4> Current Examples of this Project Include </h4>
+	<ul class="list-group">
 		<% @project.project_instances.each do |pi| %>
-			<li> <%= pi.school %>, <%= pi.town %> </li>
+		<a href = <%="/projects/display_instance/#{pi.id}"%> class="list-group-item"> 
+			<h4>
+			<%= pi.school %>
+			</h4>
+		</a>
 		<% end %>
 	</ul>
 <% end %>
 
-<p> <%= link_to "Create a new Instance of this Project", controller: "projects", action: "new_instance", id: @project.id %> </p>
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createInstanceModal">
+  Create A New Instance
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="createInstanceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Create an instance of <%=@project.project_name %> </h4>
+      </div>
+		<%= form_tag({:controller => "projects", :action => "post_newinstance", :id  => params[:id]}, :method => "post") do %>
+			<div class="modal-body">
+				<p> <%= label_tag(:school, "Enter the school name:") %> </p>
+				<p> <%= text_field_tag(:school) %> </p>
+				<p> <%= label_tag(:town, "Enter the town name:") %> </p>
+				<p> <%= text_field_tag(:town) %> </p>
+				<p> <%= label_tag(:course, "Enter the course name:") %> </p>
+				<p> <%= text_field_tag(:course) %> </p>
+				<p> <%= label_tag(:grade_level, "Enter the grade level of the students:") %> </p>
+				<p> <%= number_field_tag(:grade_level, nil, in: 1...13) %> </p>
+				<p> <%= label_tag(:number_of_students, "Enter the number of students:") %> </p>
+				<p> <%= number_field_tag(:number_of_students) %> </p>
+
+				<p> <%= label_tag(:start_date, "Enter the start date:") %> </p>
+				<p> <%= date_field_tag(:start_date) %> </p>
+
+				<p> <%= label_tag(:end_date, "Enter the end date:") %> </p>
+				<p> <%= date_field_tag(:end_date) %> </p>
+
+				<p> <%= label_tag(:materials_and_costs, "List all of the costs associated with this project:") %> </p>
+				<p> <%= text_area_tag(:materials_and_costs, nil, size: "30x5") %> </p>
+
+				<p> <%= label_tag(:learning_goals, "List each of the educational learning standards and other goals for students intended to be covered by the project:") %> </p>
+				<p> <%= text_area_tag(:learning_goals, nil, size: "30x5") %> </p>
+
+				<p> <%= label_tag(:participation, "Did any individuals from community organizations participate in the project:") %> </p>
+				<p> <%= select_tag(:participation, "<option>Yes</option><option>No</option>".html_safe) %> </p>
+
+				<p> <%= label_tag(:project_name, "If so, list them:") %> </p>
+				<p> <%= text_field_tag(:project_name) %> </p>
+
+				<p> <%= label_tag(:steps, "Describe the steps taken in this project:") %> </p>
+				<p> <%= text_area_tag(:steps, nil, size: "30x5") %> </p>
+
+				<p> <%= label_tag(:preparation, "Describe how the students prepared for this project:") %> </p>
+				<p> <%= text_area_tag(:preparation, nil, size: "30x5") %> </p>
+
+				<p> <%= label_tag(:reflection_activities, "What reflection activities were done to conclude the project:") %> </p>
+				<p> <%= text_area_tag(:reflection_activities, nil, size: "30x5") %> </p>
+ 			</div>
+
+ 			<div class="modal-footer">
+       			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        		<button type="submit" class="btn btn-primary">Submit</button>
+      		</div>
+		<% end %>
+    </div>
+  </div>
+</div>

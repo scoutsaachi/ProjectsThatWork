@@ -14,10 +14,6 @@ class ProjectsController < ApplicationController
     @category = Category.find(params[:id])
   end
 
-  #new project (id must be category)
-  def new
-  end
-
   #post method for creating new project
   def post_new
     p = Project.create(project_name: params[:project_name], course_subject: params[:course_subject], description: params[:description],
@@ -25,9 +21,15 @@ class ProjectsController < ApplicationController
     if params[:id] == nil
       params[:id] = 1
     end
+    if params[:categories]
+      for categoryID in params[:categories]
+        c = Category.find(categoryID)
+        p.categories << c
+      end
+    end
     c = Category.find(params[:id])
     p.categories << c
-    redirect_to({controller: "projects", :action => "display", :id => p.id})
+    redirect_to({controller: "projects", :action => "display_category", :id => c.id})
   end
 
   #id must be project id
@@ -35,9 +37,9 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
   end
 
-  #id must be project id
-  def new_instance
-    @project = Project.find(params[:id])
+  #id must be project instance id
+  def display_instance
+    @project_instance = ProjectInstance.find(params[:id])
   end
 
   def post_newinstance
