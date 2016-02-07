@@ -1,10 +1,58 @@
 <div class="page-header">
-	<h1><%= @category.category_name %></h1>
+	<h1>Category: <%= @category.category_name %></h1>
 </div>
-<p class="lead"><%= @category.category_name %> has the following projects</p>
-<ul>
-<% @category.projects.each do |project| %>
-	<li> <%= link_to project.project_name, controller: "projects", action: "display", id: project.id %> </li>
+<% if @category.projects.size == 0 %>
+	<p class="lead"><%= @category.category_name %> has no projects</p>
+<% else %>
+	<p class="lead"><%= @category.category_name %> has the following projects</p>
+	<ul class="list-group">
+	<% @category.projects.each do |project| %>
+		<a href = <%="/projects/display/#{project.id}"%> class="list-group-item"> 
+			<h4>
+				<%= project.project_name %>
+				<span class="badge" style = "float:right"><%= project.project_instances.size %></span>
+			</h4>
+			<p><%= project.description %></p>
+		</a>
+		<% end %>
+	</ul>
 <% end %>
-</ul>
-<p> <%= link_to "Create New Project", controller: "projects", action: "new", id: @category.id %> </p>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createProjectModal">
+  Create A New Project
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="createProjectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Create a Project</h4>
+      </div>
+      <%= form_tag({:controller => "projects", :action => "post_new", :id => params[:id]}, :method => "post") do %>
+      <div class="modal-body">
+			<p><%= label_tag(:project_name, "Project Name:") %></p>
+			<p><%= text_field_tag(:project_name) %></p>
+			<p><%= label_tag(:course_subject, "Course Subject:") %></p>
+			<p><%= text_field_tag(:course_subject) %></p>
+			<p><%= label_tag(:description, "Project Description:") %></p>
+			<p><%= text_area_tag(:description) %>  </p>
+			<p><%= label_tag(:expected_difficulty, "Expected Difficulty:") %> </p>
+			<p><%= text_area_tag(:expected_difficulty) %> </p>  
+			<p><%= label_tag(:duration, "Expected Duration(Days):") %> </p>
+			<p><%= number_field_tag(:duration) %></p>
+			<p><%= label_tag(:categories, "Additional Categories") %> </p>
+			<p>
+			<%= select_tag(:categories, options_from_collection_for_select(Category.where('id != ?', @category.id), "id", "category_name"), {multiple: true, class: 'form_control', style: 'width:50%'}) %> 
+			</p>
+      </div>
+       <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+		<% end %>
+    </div>
+  </div>
+</div>
