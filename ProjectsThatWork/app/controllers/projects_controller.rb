@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   #display all categories
   def display_categories
-    @categories = Category.all
+    @categories = Category.all.sort_by{|c| -1*c.projects.size}
   end
 
   #post method for creating new category
@@ -12,6 +12,7 @@ class ProjectsController < ApplicationController
 
   def display_category
     @category = Category.find(params[:id])
+    @projects = @category.projects.sort_by {|p| -1*p.project_instances.size}
   end
 
   #post method for creating new project
@@ -35,11 +36,15 @@ class ProjectsController < ApplicationController
   #id must be project id
   def display
     @project = Project.find(params[:id])
+    @reviews = @project.reviews.order(updated_at: :desc).limit(5)
   end
 
   #id must be project instance id
   def display_instance
     @project_instance = ProjectInstance.find(params[:id])
+    @teacher_reviews = @project_instance.reviews.where(actable_type: "TeacherReview")
+    @student_reviews = @project_instance.reviews.where(actable_type: "StudentReview")
+    @organization_reviews = @project_instance.reviews.where(actable_type: "OrganizationReview")
   end
 
   def post_newinstance

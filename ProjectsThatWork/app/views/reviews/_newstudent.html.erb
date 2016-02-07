@@ -1,0 +1,26 @@
+<%= form_tag({:controller => "reviews", :action => "post_newstudent", :id  => params[:id]}, :method => "post") do %>
+	<div class="modal-body">
+		<p> <%= label_tag(:rating, "Overall, how would you rate this project?") %> </p>
+		<p> <%= select_tag(:rating, "<option value='1'>1 Terrible</option><option value='2'>2 Not Very Good</option><option value='3'>3 Average</option><option value='4'>4 Very Good</option><option value='5'>5 Excellent</option>".html_safe) %> </p>
+		<p> <%= label_tag(:feasibility, "How feasible (i.e., easy) was it for you to plan and do this project?") %> </p>
+		<p> <%= select_tag(:feasibility, "<option value='1'> 1 Not Feasible At All</option><option value='2'>2 Barely Feasible</option><option value='3'>3 Somewhat Feasible</option><option value='4'>4 Pretty Feasible</option><option value='5'>5 Very Feasible</option>".html_safe) %> </p>
+		<p> <%= label_tag(:learning_score, "Overall from start to finish, how much did you learn during this project?") %> </p>
+		<p> <%= select_tag(:learning_score, "<option value='1'>1 Nothing At All</option><option value='2'>2 A Little</option><option value='3'>3 Some</option><option value='4'>4 A Lot</option><option value='5'>5 Everything</option>".html_safe) %> </p>
+		<p> <%= label_tag(:participate_in_future_projects, "To continue to address the issue or problem, would you participate in future projects like this?") %> </p>
+		<p> <%= select_tag(:participate_in_future_projects, "<option value='1'>1 No Chance</option><option value='2'>2 Probably Not</option><option value='3'>3 Maybe Will or Will Not</option><option value='4'>4 Probably Will</option><option value='5'>5 Definitely Will</option>".html_safe) %> </p>
+		<p> <%= label_tag(:participants, "Who else participated in this project (Check all that apply)?") %> </p>
+		<p> <%= check_box_tag 'participants[]' "Alone" %> Alone, by yourself </p>
+		<p> <%= check_box_tag 'participants[]' "With Classmates" %> With your classmates </p>
+		<p> <%= check_box_tag 'participants[]' "With members of your community" %> With members of your community </p>
+		<p> <%= check_box_tag 'participants[]' "With your teacher" %> With your teacher </p>
+		<p> <%= label_tag(:planning_score, "How much were you involved in the planning and preparation of the project?") %> </p>
+		<p> <%= select_tag(:planning_score, "<option value='1'>1 Not at all</option><option value='2'>2 A Little</option><option value='3'>3 Somewhat</option><option value='4'>4 A Lot</option><option value='5'>5 Completely</option>".html_safe) %> </p>
+		<p> <%= label_tag(:review_text, "Write a review of this project. ") %> </p>
+		<p> <%= text_area_tag(:review_text, nil, size: "30x5") %> </p>
+	</div>
+
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</div>
+<% end %>
