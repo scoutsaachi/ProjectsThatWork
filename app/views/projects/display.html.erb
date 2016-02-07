@@ -2,9 +2,11 @@
 	<h1>Project: <%= @project.project_name %> </h1>
 </div>
 
-<div class="jumbotron" style = "background:#F8F8F8;text-align:center">
-    <h1><%= @project.project_name %></h1>
-    <h2><%= @project.description %></h2>
+<div class="jumbotron" style = "background:#F8F8F8">
+	<div style = "text-align:center">
+	    <h2><%= @project.project_name %></h2>
+	    <h3><%= @project.description %></h3>
+    </div>
     <br>
 
     <div class="row">
@@ -22,7 +24,19 @@
 	</div>
  </div>
 
-
+<% if @reviews.size != 0 %>
+	<h4> Recent Reviews of this Project </h4>
+	<ul class="list-group">
+		<% @reviews.each do |review| %>
+			<a href = "#home" class="list-group-item"> 
+			<h4>Review: <%= review.rating %></h4>
+			<p><%= review.review_text %> </p>
+			</a>
+		<% end %>
+	</ul>
+<% end %>
+<br>
+<!-- Project Instances -->
 <% if @project.project_instances.size != 0 %>
 	<h4> Current Examples of this Project Include </h4>
 	<ul class="list-group">

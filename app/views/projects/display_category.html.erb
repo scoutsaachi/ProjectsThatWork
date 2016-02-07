@@ -1,12 +1,12 @@
 <div class="page-header">
 	<h1>Category: <%= @category.category_name %></h1>
 </div>
-<% if @category.projects.size == 0 %>
+<% if @projects.size == 0 %>
 	<p class="lead"><%= @category.category_name %> has no projects</p>
 <% else %>
 	<p class="lead"><%= @category.category_name %> has the following projects</p>
 	<ul class="list-group">
-	<% @category.projects.each do |project| %>
+	<% @projects.each do |project| %>
 		<a href = <%="/projects/display/#{project.id}"%> class="list-group-item"> 
 			<h4>
 				<%= project.project_name %>
