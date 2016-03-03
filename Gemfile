@@ -36,6 +36,8 @@ gem 'autoprefixer-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'devise'
+
 # gem 'multiple_table_inheritance', '~> 0.2.1' 
 gem 'active_record-acts_as'
 
