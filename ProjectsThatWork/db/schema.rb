@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20160223063943) do
     t.string   "reflection_activities"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.integer  "rating_aggregate"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -60,6 +61,7 @@ ActiveRecord::Schema.define(version: 20160223063943) do
     t.integer  "duration"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.integer  "rating_aggregate"
   end
 
   create_table "reviews", force: :cascade do |t|
