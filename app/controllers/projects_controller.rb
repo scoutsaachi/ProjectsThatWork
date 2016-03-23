@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   #display all categories
   def display_categories
-    @categories = Category.all
+    @categories = Category.all.sort_by{|c| -1*c.projects.size}
   end
 
   #post method for creating new category
@@ -12,10 +12,7 @@ class ProjectsController < ApplicationController
 
   def display_category
     @category = Category.find(params[:id])
-  end
-
-  #new project (id must be category)
-  def new
+    @projects = @category.projects.sort_by {|p| -1*p.project_instances.size}
   end
 
   #post method for creating new project
@@ -25,19 +22,29 @@ class ProjectsController < ApplicationController
     if params[:id] == nil
       params[:id] = 1
     end
+    if params[:categories]
+      for categoryID in params[:categories]
+        c = Category.find(categoryID)
+        p.categories << c
+      end
+    end
     c = Category.find(params[:id])
     p.categories << c
-    redirect_to({controller: "projects", :action => "display", :id => p.id})
+    redirect_to({controller: "projects", :action => "display_category", :id => c.id})
   end
 
   #id must be project id
   def display
     @project = Project.find(params[:id])
+    @reviews = @project.reviews.order(updated_at: :desc).limit(5)
   end
 
-  #id must be project id
-  def new_instance
-    @project = Project.find(params[:id])
+  #id must be project instance id
+  def display_instance
+    @project_instance = ProjectInstance.find(params[:id])
+    @teacher_reviews = @project_instance.reviews.where(actable_type: "TeacherReview")
+    @student_reviews = @project_instance.reviews.where(actable_type: "StudentReview")
+    @organization_reviews = @project_instance.reviews.where(actable_type: "OrganizationReview")
   end
 
   def post_newinstance

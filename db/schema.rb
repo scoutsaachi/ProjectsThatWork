@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160131231011) do
+ActiveRecord::Schema.define(version: 20160223061614) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "category_name"
@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(version: 20160131231011) do
     t.string   "course"
     t.integer  "grade_level"
     t.integer  "number_of_students"
-    t.datetime "start_date"
-    t.datetime "end_date"
+    t.date     "start_date"
+    t.date     "end_date"
     t.string   "materials_and_costs"
     t.string   "learning_goals"
     t.boolean  "community_participation"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20160131231011) do
     t.string   "reflection_activities"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.integer  "rating_aggregate"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -60,6 +61,7 @@ ActiveRecord::Schema.define(version: 20160131231011) do
     t.integer  "duration"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.integer  "rating_aggregate"
   end
 
   create_table "reviews", force: :cascade do |t|
