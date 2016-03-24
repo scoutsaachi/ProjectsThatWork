@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout'}  
   get ':controller(/:action(/:id))'
   post ':controller(/:action(/:id))'
-  root 'projects#display_categories'
+  root 'index#display'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
