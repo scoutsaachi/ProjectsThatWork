@@ -65,14 +65,14 @@ ActiveRecord::Schema.define(version: 20160324213111) do
   create_table "rating_aggregates", force: :cascade do |t|
     t.integer  "project_id"
     t.integer  "project_instance_id"
-    t.integer  "rating"
-    t.integer  "feasibility"
-    t.integer  "learning_score"
-    t.integer  "learning_effectiveness"
-    t.integer  "students_future_projects"
-    t.integer  "planning_score"
-    t.integer  "org_future_projects"
-    t.integer  "impact"
+    t.float    "rating"
+    t.float    "feasibility"
+    t.float    "learning_score"
+    t.float    "learning_effectiveness"
+    t.float    "students_future_projects"
+    t.float    "planning_score"
+    t.float    "org_future_projects"
+    t.float    "impact"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
