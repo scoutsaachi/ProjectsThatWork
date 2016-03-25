@@ -18,10 +18,14 @@
 	</ul>
 <% end %>
 
+<% if user_signed_in? %>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createProjectModal">
   Create A New Project
 </button>
+<% else %>
+<h4> Login to create a new project </h4>
+<% end %>
 
 <!-- Modal -->
 <div class="modal fade" id="createProjectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -40,9 +44,9 @@
 			<p><%= label_tag(:description, "Project Description:") %></p>
 			<p><%= text_area_tag(:description) %>  </p>
 			<p><%= label_tag(:expected_difficulty, "Expected Difficulty:") %> </p>
-			<p><%= text_area_tag(:expected_difficulty) %> </p>  
+      <p><%= select_tag :expected_difficulty, "<option>Lower School</option><option>Middle School</option><option>High School</option><option>Any</option>".html_safe %> </p>
 			<p><%= label_tag(:duration, "Expected Duration(Days):") %> </p>
-			<p><%= number_field_tag(:duration) %></p>
+			<p><%= text_area_tag(:duration) %></p>
 			<p><%= label_tag(:categories, "Additional Categories") %> </p>
 			<p>
 			<%= select_tag(:categories, options_from_collection_for_select(Category.where('id != ?', @category.id), "id", "category_name"), {multiple: true, class: 'form_control', style: 'width:50%'}) %> 

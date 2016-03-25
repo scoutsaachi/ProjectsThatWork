@@ -1,0 +1,30 @@
+<table class="table">
+<thead>
+<tr>
+	<th>Name</th>
+	<th>Course Subject</th>
+	<th>Difficulty </th>
+	<th>Categories</th>
+	<th>Rating</th>
+</tr>
+</thead>
+<% for project in projects %>
+	<tr>
+	<td><%= project.project_name %></td>
+	<td><%= project.course_subject%></td>
+	<td><%= project.expected_difficulty%></td>
+	<td>
+		<% project.categories.first(4).each do |category| %>
+	  		<%= link_to category.category_name, controller: "projects", action: "display_category", id: category.id %> 
+	  	<%end%>
+  	</td>
+  	<% rating = project.rating_aggregate.rating %>
+	<td>
+		<% if rating != nil %>
+			<%= render "stars", :rating => rating.round %>
+		<% else %>
+			Not Rated
+		<% end %>
+	</td>
+	</tr>
+<% end %>

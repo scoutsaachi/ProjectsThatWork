@@ -55,5 +55,41 @@ class ProjectsController < ApplicationController
     redirect_to({controller: "projects", :action => "display", :id => params[:id]})
   end
 
+  def browse
+    @projects = Project.all
+    if params[:expected_difficulty]
+      @projects = @projects.where(expected_difficulty: params[:expected_difficulty])
+    end
+    if params[:category]
+      cat_id = params[:category].to_i
+      @projects = @projects.includes(:categories).where(categories: {id: cat_id})
+    end
+    if params[:sort_by] == nil
+      params[:sort_by] = 1
+    end
+    case params[:sort_by].to_i
+    when 1
+      @projects = @projects.includes(:rating_aggregate).order("rating_aggregates.rating DESC").references(:rating_aggregates)
+    when 2
+      @projects = @projects.order(created_at: :desc)
+    when 3
+      @projects = @projects.order(created_at: :asc)
+    when 4
+      @projects = @projects.sort_by {|p| p.project_instances.count}
+    when 5
+      @projects = @projects.includes(:rating_aggregate).order("rating_aggregates.feasibility DESC").references(:rating_aggregates)
+    end
+  end
 
+  def post_filter_projects
+    options = {controller: "projects", :action => "browse"}
+    if params[:expected_difficulty] != "Any"
+      options[:expected_difficulty] = params[:expected_difficulty]
+    end
+    if params[:category] != "-1"
+      options[:category] = params[:categories]
+    end
+    options[:sort_by] = params[:sort_by]
+    redirect_to(options)
+  end
 end

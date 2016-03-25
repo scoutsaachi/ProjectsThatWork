@@ -4,106 +4,118 @@
 
 <div class="jumbotron" style = "background:#F8F8F8">
 	<div style = "text-align:center">
-	    <h2><%= @project_instance.project.project_name %></h2>
-	    <h3><%= @project_instance.start_date%> to <%=@project_instance.end_date%></h3>
-	 </div>
-    <br>
+   <h2><%= @project_instance.project.project_name %></h2>
+   <h3><%= @project_instance.start_date%> to <%=@project_instance.end_date%></h3>
+ </div>
+ <br>
 
-    <div class="row">
-    	<div class="col-md-4"><p><strong>School:</strong> <%= @project_instance.school %></p></div>
-    	<div class="col-md-4"><p><strong>Town:</strong> <%= @project_instance.town %></p></div>
-  		<div class="col-md-4"><p><strong>Course:</strong> <%= @project_instance.course %></p></div>
-	</div>
-	<div class="row">
-	  	<div class="col-md-4"><p> <strong> Grade:</strong> <%= @project_instance.grade_level %> </p></div>
-	  	<div class="col-md-4"><p> <strong> Students:</strong> <%= @project_instance.number_of_students %> </p></div>
-  		<div class="col-md-4"><p> <strong>Community Partners:</strong> <%= @project_instance.community_partners %> </p></div>
+ <div class="row">
+   <div class="col-md-4"><p><strong>School:</strong> <%= @project_instance.school %></p></div>
+   <div class="col-md-4"><p><strong>Town:</strong> <%= @project_instance.town %></p></div>
+   <div class="col-md-4"><p><strong>Course:</strong> <%= @project_instance.course %></p></div>
+ </div>
+ <div class="row">
+  <div class="col-md-4"><p> <strong> Grade:</strong> <%= @project_instance.grade_level %> </p></div>
+  <div class="col-md-4"><p> <strong> Students:</strong> <%= @project_instance.number_of_students %> </p></div>
+  <div class="col-md-4"><p> <strong>Community Partners:</strong> <%= @project_instance.community_partners %> </p></div>
 
-	</div>
-	<div class="row">
-  		<div class="col-md-4"><p> <strong> Learning Goals: </strong><%= @project_instance.learning_goals %> </p></div>
-  		<div class="col-md-4"><p> <strong>Preparation:</strong> <%= @project_instance.preparation %> </p></div>
-  		<div class="col-md-4"><p> <strong>Steps:</strong> <%= @project_instance.steps %> </p></div>  		
-	</div>
-	<div class="row">
-  		<div class="col-md-4"><p> <strong>Reflection Activities: </strong><%= @project_instance.reflection_activities %> </p></div>
-  		 <div class="col-md-4"><p> <strong>Materials and Costs:</strong> <%= @project_instance.materials_and_costs %> </p></div>
+</div>
+<div class="row">
+  <div class="col-md-4"><p> <strong> Learning Goals: </strong><%= @project_instance.learning_goals %> </p></div>
+  <div class="col-md-4"><p> <strong>Preparation:</strong> <%= @project_instance.preparation %> </p></div>
+  <div class="col-md-4"><p> <strong>Steps:</strong> <%= @project_instance.steps %> </p></div>  		
+</div>
+<div class="row">
+  <div class="col-md-4"><p> <strong>Reflection Activities: </strong><%= @project_instance.reflection_activities %> </p></div>
+  <div class="col-md-4"><p> <strong>Materials and Costs:</strong> <%= @project_instance.materials_and_costs %> </p></div>
 
-	</div>
+</div>
 </div>
 
 <div>
 
 
-<div>
+  <div>
 
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#teacher" aria-controls="teacher" role="tab" data-toggle="tab">Teacher Reviews</a></li>
-    <li role="presentation"><a href="#student" aria-controls="student" role="tab" data-toggle="tab">Student Reviews</a></li>
-    <li role="presentation"><a href="#org" aria-controls="org" role="tab" data-toggle="tab">Organization Reviews</a></li>
-  </ul>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#teacher" aria-controls="teacher" role="tab" data-toggle="tab">Teacher Reviews</a></li>
+      <li role="presentation"><a href="#student" aria-controls="student" role="tab" data-toggle="tab">Student Reviews</a></li>
+      <li role="presentation"><a href="#org" aria-controls="org" role="tab" data-toggle="tab">Organization Reviews</a></li>
+    </ul>
 
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="teacher">
-    	 <% if @teacher_reviews.size == 0 %>
-    		<h4> There are no teacher reviews for this instance of this project </h4>
-    	<% else %>
-			<ul class="list-group">
-				<% @teacher_reviews.each do |teacher_review| %>
-					<a href = <%="/reviews/display_teacher_review/#{teacher_review.id}"%> class="list-group-item"> 
-						<h4>Teacher Review: <%= teacher_review.rating %></h4>
-						<p><%= teacher_review.review_text %> </p>
-					</a>
-				<% end %>
-			</ul>
-		<% end %>
-	<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createTeacherReview">
-  		Review this Project
-	</button>
-    </div>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="teacher">
+        <% if @teacher_reviews.size == 0 %>
+        <h4> There are no teacher reviews for this instance of this project </h4>
+        <% else %>
+        <ul class="list-group">
+          <% @teacher_reviews.each do |teacher_review| %>
+          <a href = <%="/reviews/display_teacher_review/#{teacher_review.id}"%> class="list-group-item"> 
+            <h4>Teacher Review: <%= teacher_review.rating %></h4>
+            <p><%= teacher_review.review_text %> </p>
+          </a>
+          <% end %>
+        </ul>
+        <% end %>
+        <% if user_signed_in? %>
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createTeacherReview">
+          Review this Project
+        </button>
+        <% else %>
+        <h4> Please login to review this project</h4>
+        <% end %>
+      </div>
 
-    <div role="tabpanel" class="tab-pane" id="student">
-    	 <% if @student_reviews.size == 0 %>
-    		<h4> There are no student reviews for this instance of this project </h4>
-    	<% else %>
-			<ul class="list-group">
-				<% @student_reviews.each do |student_review| %>
-					<a href = "#home" class="list-group-item"> 
-						<h4>Student Review: <%= student_review.rating %></h4>
-						<p><%= student_review.review_text %> </p>
-					</a>
-				<% end %>
-			</ul>   
-		<% end %> 
-		<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createStudentReview">
-  			Review this Project
-		</button>
-    </div>
-    <div role="tabpanel" class="tab-pane" id="org">
-    	 <% if @organization_reviews.size == 0 %>
-    		<h4> There are no organization reviews for this instance of this project </h4>
-    	<% else %>
-			<ul class="list-group">
-				<% @organization_reviews.each do |organization_review| %>
-					<a href = "#home" class="list-group-item"> 
-						<h4>Organization Review: <%= organization_review.rating %></h4>
-						<p><%= organization_review.review_text %> </p>
-					</a>
-				<% end %>
-			</ul>  
-		<% end %>  	
-		<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createOrganizationReview">
-  			Review this Project
-		</button>
-    </div>
-  </div>
+      <div role="tabpanel" class="tab-pane" id="student">
+        <% if @student_reviews.size == 0 %>
+        <h4> There are no student reviews for this instance of this project </h4>
+        <% else %>
+        <ul class="list-group">
+          <% @student_reviews.each do |student_review| %>
+          <a href = "#home" class="list-group-item"> 
+            <h4>Student Review: <%= student_review.rating %></h4>
+            <p><%= student_review.review_text %> </p>
+          </a>
+          <% end %>
+        </ul>   
+        <% end %> 
+        <% if user_signed_in? %>
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createStudentReview">
+         Review this Project
+       </button>
+       <% else %>
+       <h4> Please login to review this project</h4>
+       <% end %>
+     </div>
+     
+     <div role="tabpanel" class="tab-pane" id="org">
+      <% if @organization_reviews.size == 0 %>
+      <h4> There are no organization reviews for this instance of this project </h4>
+      <% else %>
+      <ul class="list-group">
+        <% @organization_reviews.each do |organization_review| %>
+        <a href = "#home" class="list-group-item"> 
+          <h4>Organization Review: <%= organization_review.rating %></h4>
+          <p><%= organization_review.review_text %> </p>
+        </a>
+        <% end %>
+      </ul>  
+      <% end %>
+      <% if user_signed_in? %>  	
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createOrganizationReview">
+       Review this Project
+     </button>
+     <% else %>
+     <h4> Please login to review this project</h4>
+     <% end %>
+   </div>
+ </div>
 
 </div>
 <br>
 <br>
-
 
 <!-- Modal -->
 <div class="modal fade" id="createTeacherReview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -113,7 +125,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Review this Project </h4>
       </div>
-		<%= render "reviews/newteacher" %>
+      <%= render "reviews/newteacher" %>
     </div>
   </div>
 </div>
@@ -125,7 +137,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Review this Project </h4>
       </div>
-		<%= render "reviews/newstudent" %>
+      <%= render "reviews/newstudent" %>
     </div>
   </div>
 </div>
@@ -137,7 +149,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Review this Project </h4>
       </div>
-		<%= render "reviews/neworg" %>
+      <%= render "reviews/neworg" %>
     </div>
   </div>
 </div>

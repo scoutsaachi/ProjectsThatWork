@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160223063943) do
+ActiveRecord::Schema.define(version: 20160324213111) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "category_name"
@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(version: 20160223063943) do
     t.string   "reflection_activities"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
-    t.integer  "rating_aggregate"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -58,10 +57,24 @@ ActiveRecord::Schema.define(version: 20160223063943) do
     t.string   "course_subject"
     t.string   "description"
     t.string   "expected_difficulty"
-    t.integer  "duration"
+    t.string   "duration"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
-    t.integer  "rating_aggregate"
+  end
+
+  create_table "rating_aggregates", force: :cascade do |t|
+    t.integer  "project_id"
+    t.integer  "project_instance_id"
+    t.integer  "rating"
+    t.integer  "feasibility"
+    t.integer  "learning_score"
+    t.integer  "learning_effectiveness"
+    t.integer  "students_future_projects"
+    t.integer  "planning_score"
+    t.integer  "org_future_projects"
+    t.integer  "impact"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -80,7 +93,7 @@ ActiveRecord::Schema.define(version: 20160223063943) do
     t.integer  "learning_score"
     t.integer  "participate_in_future_projects"
     t.string   "participants"
-    t.string   "planning_score"
+    t.integer  "planning_score"
     t.string   "gender"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false

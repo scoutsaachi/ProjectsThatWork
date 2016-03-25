@@ -1,0 +1,22 @@
+<% options = '<option value = "-1">Any</option>'.html_safe + options_from_collection_for_select(Category.all, "id", "category_name") %>
+<%= form_tag({:controller => "projects", :action => "post_filter_projects"}, :method => "get") do %>
+	<table class= "table">
+	<thead>
+	<tr>
+	<th><%= label_tag(:expected_difficulty, "Expected Difficulty:") %>
+    <%= select_tag :expected_difficulty, "<option>Any</option><option>Lower School</option><option>Middle School</option><option>High School</option>".html_safe %> </th>
+    <th><%= label_tag(:categories, "Category") %>
+	<%= select_tag(:categories, options, {multiple: false, class: 'form_control'}) %></th>
+
+	<th><%= label_tag(:sort_by, "Sort By:") %>
+    <%= select_tag :sort_by, '<option value = "1">Rating</option><option value = "2">Most Recent</option><option value = "3">Least Recent</option><option value = "3"># of Project Instances</option><option value = "4"> Feasibility</option>'.html_safe %> </th>
+
+    <th><button type="submit" class="btn btn-primary">Submit</button> </th>
+    </tr>
+    </thead>
+    </table>
+<% end %>
+
+
+Your Results:
+<%= render "table", :projects => @projects %>

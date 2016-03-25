@@ -32,13 +32,18 @@
           <ul class="nav navbar-nav">
             <li><a href="/">Home</a></li>
             <li><a href="/projects/display_categories">Categories</a></li>
-            <li><a href="#search">Search</a></li>
-            <li><a href="#contact">Browse</a></li>
+            <li><a href="/projects/browse">Browse</a></li>
             <li><a href="#contact">Rate</a></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="/login">Teacher Login</a></li>
-          </ul>
+          <% if user_signed_in? %>
+            <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %> </li>
+            </ul>
+          <% else %>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/login">Login</a></li>
+            </ul>
+          <% end %>
         </div>
       </div>
     </nav>
