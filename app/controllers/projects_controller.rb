@@ -87,7 +87,7 @@ class ProjectsController < ApplicationController
       options[:expected_difficulty] = params[:expected_difficulty]
     end
     if params[:category] != "-1"
-      options[:category] = params[:categories]
+      options[:category] = params[:category]
     end
     options[:sort_by] = params[:sort_by]
     redirect_to(options)

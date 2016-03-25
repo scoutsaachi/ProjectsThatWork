@@ -3,33 +3,76 @@
 </div>
 
 <div class="jumbotron" style = "background:#F8F8F8">
-	<div style = "text-align:center">
-   <h2><%= @project_instance.project.project_name %></h2>
-   <h3><%= @project_instance.start_date%> to <%=@project_instance.end_date%></h3>
- </div>
- <br>
+  	<div style = "text-align:center">
+     <h2><%= @project_instance.project.project_name %></h2>
+     <h3><%= @project_instance.start_date%> to <%=@project_instance.end_date%></h3>
+   </div>
+   <br>
 
- <div class="row">
-   <div class="col-md-4"><p><strong>School:</strong> <%= @project_instance.school %></p></div>
-   <div class="col-md-4"><p><strong>Town:</strong> <%= @project_instance.town %></p></div>
-   <div class="col-md-4"><p><strong>Course:</strong> <%= @project_instance.course %></p></div>
- </div>
- <div class="row">
-  <div class="col-md-4"><p> <strong> Grade:</strong> <%= @project_instance.grade_level %> </p></div>
-  <div class="col-md-4"><p> <strong> Students:</strong> <%= @project_instance.number_of_students %> </p></div>
-  <div class="col-md-4"><p> <strong>Community Partners:</strong> <%= @project_instance.community_partners %> </p></div>
+   <div class="row">
+     <div class="col-md-4"><p><strong>School:</strong> <%= @project_instance.school %></p></div>
+     <div class="col-md-4"><p><strong>Town:</strong> <%= @project_instance.town %></p></div>
+     <div class="col-md-4"><p><strong>Course:</strong> <%= @project_instance.course %></p></div>
+   </div>
+  <div class="row">
+    <div class="col-md-4"><p> <strong> Grade:</strong> <%= @project_instance.grade_level %> </p></div>
+    <div class="col-md-4"><p> <strong> Students:</strong> <%= @project_instance.number_of_students %> </p></div>
+    <div class="col-md-4"><p> <b>Community Partners:</b> <%= @project_instance.community_partners %> </p></div>
+  </div>
 
-</div>
-<div class="row">
-  <div class="col-md-4"><p> <strong> Learning Goals: </strong><%= @project_instance.learning_goals %> </p></div>
-  <div class="col-md-4"><p> <strong>Preparation:</strong> <%= @project_instance.preparation %> </p></div>
-  <div class="col-md-4"><p> <strong>Steps:</strong> <%= @project_instance.steps %> </p></div>  		
-</div>
-<div class="row">
-  <div class="col-md-4"><p> <strong>Reflection Activities: </strong><%= @project_instance.reflection_activities %> </p></div>
-  <div class="col-md-4"><p> <strong>Materials and Costs:</strong> <%= @project_instance.materials_and_costs %> </p></div>
+  <div class="row">
+    <div class="col-md-12"><p> <strong> Learning Goals: </strong><%= @project_instance.learning_goals %> </p></div>
+  </div>
+  <div class="row">
+    <div class="col-md-12"><p> <strong>Materials and Costs:</strong> <%= @project_instance.materials_and_costs %> </p></div>
+  </div>
+  <div class="row">
+    <div class="col-md-12"><p> <strong>Preparation:</strong> <%= @project_instance.preparation %> </p></div>
+  </div>
+  <div class="row">
+    <div class="col-md-12"><p> <strong>Steps:</strong> <%= @project_instance.steps %> </p></div>
+  </div>
+  <div class="row">
+    <div class="col-md-12"><p> <strong>Reflection Activities: </strong><%= @project_instance.reflection_activities %> </p></div>
+  </div>
 
-</div>
+
+  <% r = @project_instance.rating_aggregate %>
+  <div class="row">
+    <% if r.rating != nil %>
+      <div class = "col-md-6"><p><strong>Overall Rating:</strong> <%= render "stars", :rating => r.rating.round %></p></div>
+    <% end %>
+    <% if r.feasibility != nil %>
+      <div class = "col-md-6"><p><strong>Feasibility:</strong> <%= render "stars", :rating => r.feasibility.round %></p></div>
+    <% end %>
+  </div>
+  <div class="row">
+    <% if r.learning_effectiveness != nil %>
+      <div class = "col-md-6"><p><strong>Achieved Learning Goals:</strong> <%= render "stars", :rating => r.learning_effectiveness.round %></p></div>
+    <% end %>
+    <% if r.learning_score != nil %>
+      <div class = "col-md-6"><p><strong>Student Learning Score:</strong> <%= render "stars", :rating => r.learning_score.round %></p></div>
+    <% end %>
+  </div>
+  <div class="row">
+    <% if r.planning_score != nil %>
+      <div class = "col-md-6"><p><strong>Student involvement in planning:</strong> <%= render "stars", :rating => r.planning_score.round %></p></div>
+    <% end %>
+    <% if r.students_future_projects != nil %>
+      <div class = "col-md-6"><p><strong>Would students participate again:</strong> <%= render "stars", :rating => r.students_future_projects.round %></p></div>
+    <% end %>
+  </div>
+  <div class="row">
+    <% if r.impact != nil %>
+      <div class = "col-md-6"><p><strong>Community Impact:</strong> <%= render "stars", :rating => r.impact.round %></p></div>
+    <% end %>
+    <% if r.org_future_projects != nil %>
+      <div class = "col-md-6"><p><strong>Would Community Partners participate again:</strong> <%= render "stars", :rating => r.org_future_projects.round %></p></div>
+    <% end %>
+  </div>
+
+
+
 </div>
 
 <div>
@@ -50,14 +93,9 @@
         <% if @teacher_reviews.size == 0 %>
         <h4> There are no teacher reviews for this instance of this project </h4>
         <% else %>
-        <ul class="list-group">
-          <% @teacher_reviews.each do |teacher_review| %>
-          <a href = <%="/reviews/display_teacher_review/#{teacher_review.id}"%> class="list-group-item"> 
-            <h4>Teacher Review: <%= teacher_review.rating %></h4>
-            <p><%= teacher_review.review_text %> </p>
-          </a>
-          <% end %>
-        </ul>
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <%= render "reviewsList", :reviews => @teacher_reviews %>
+          </div>
         <% end %>
         <% if user_signed_in? %>
         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createTeacherReview">
@@ -72,14 +110,9 @@
         <% if @student_reviews.size == 0 %>
         <h4> There are no student reviews for this instance of this project </h4>
         <% else %>
-        <ul class="list-group">
-          <% @student_reviews.each do |student_review| %>
-          <a href = "#home" class="list-group-item"> 
-            <h4>Student Review: <%= student_review.rating %></h4>
-            <p><%= student_review.review_text %> </p>
-          </a>
-          <% end %>
-        </ul>   
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <%= render "reviewsList", :reviews => @student_reviews %>
+          </div>
         <% end %> 
         <% if user_signed_in? %>
         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createStudentReview">
@@ -94,14 +127,9 @@
       <% if @organization_reviews.size == 0 %>
       <h4> There are no organization reviews for this instance of this project </h4>
       <% else %>
-      <ul class="list-group">
-        <% @organization_reviews.each do |organization_review| %>
-        <a href = "#home" class="list-group-item"> 
-          <h4>Organization Review: <%= organization_review.rating %></h4>
-          <p><%= organization_review.review_text %> </p>
-        </a>
-        <% end %>
-      </ul>  
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <%= render "reviewsList", :reviews => @organization_reviews %>
+        </div>
       <% end %>
       <% if user_signed_in? %>  	
       <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createOrganizationReview">

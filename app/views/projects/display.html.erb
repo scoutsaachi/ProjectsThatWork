@@ -10,17 +10,32 @@
     <br>
 
     <div class="row">
-  		<div class="col-md-4"><p><strong>Subject:</strong> <%= @project.course_subject %></p></div>
-  		<div class="col-md-4"><p><strong>Expected Difficulty:</strong> <%= @project.expected_difficulty %></p></div>
-  		<div class="col-md-4"><p><strong>Expected duration: </strong><%= @project.duration %></p></div>
+  		<div class="col-md-6"><p><strong>Subject:</strong> <%= @project.course_subject %></p></div>
+  		<div class="col-md-6"><p><strong>Expected Difficulty:</strong> <%= @project.expected_difficulty %></p></div>
 	</div>
 	<div class="row">
-  		<div class="col-md-4"><p><strong>Project Instances:</strong> <%= @project.project_instances.size %></p></div>
-  		<div class="col-md-4"><p><strong>Categories:</strong> 
+  		 <div class="col-md-6"><p><strong>Expected duration: </strong><%= @project.duration %></p></div>
+  		<div class="col-md-6"><p><strong>Categories:</strong> 
   		<% @project.categories.each do |category| %>
-  			<%= link_to category.category_name, controller: "projects", action: "display_category", id: category.id %> 
+  			<%= link_to category.category_name, controller: "projects", action: "display_category", id: category.id %>, 
   		<%end%> </p></div>
-  		<div class="col-md-4"><p><strong>Rating: </strong> Not Implemented Yet</p></div>
+	</div>
+	<% r = @project.rating_aggregate %>
+	<div class="row">
+		<% if r.rating != nil %>
+			<div class = "col-md-6"><p><strong>Overall Rating:</strong> <%= render "stars", :rating => r.rating.round %></p></div>
+		<% end %>
+		<% if r.feasibility != nil %>
+			<div class = "col-md-6"><p><strong>Feasibility:</strong> <%= render "stars", :rating => r.feasibility.round %></p></div>
+		<% end %>
+	</div>
+	<div class="row">
+		<% if r.learning_effectiveness != nil %>
+			<div class = "col-md-6"><p><strong>Achieved Learning Goals:</strong> <%= render "stars", :rating => r.learning_effectiveness.round %></p></div>
+		<% end %>
+		<% if r.learning_score != nil %>
+			<div class = "col-md-6"><p><strong>Student Learning Score:</strong> <%= render "stars", :rating => r.learning_score.round %></p></div>
+		<% end %>
 	</div>
  </div>
 

@@ -1,18 +1,47 @@
 <% reviews.each do |review| %>
+
+	<% reviewType = "Student Review" %>
+	<% if review.actable_type == "TeacherReview" %>
+		<% reviewType = "Teacher Review" %>
+	<% elsif review.actable_type == "OrganizationReview" %>
+		<% reviewType = "OrganizationReview" %>
+	<% end %>
+
 	<% headingID = "heading" + review.id.to_s %>
 	<% collapseID = "collapse" + review.id.to_s %>
 	<div>
 	<div class="panel panel-default">
 			<div class="panel-heading" role="tab" id = <%= "#{headingID}" %> >
+				<h4>
 				<a data-toggle="collapse" data-parent="#accordion" href=<%= "#"+collapseID %> aria-expanded="false" aria-controls= <%= collapseID %> style = "text-decoration: none;">
-				<h4>Review: <%= review.rating %></h4>
-				</a>
+				<%= reviewType %>:</a> <%= render "stars", :rating => review.rating %></h4>
+				
 				<p><%= review.review_text %> </p>
 		</div>
 	</div>
 	<div id=<%= collapseID%> class="panel-collapse collapse" role="tabpanel" aria-labelledby=<%= headingID %>>
 	      <div class="panel-body">
-	      	lkdsjflsdk
+			<p> <b>Project Instance:</b> <%= review.project_instance.school %> </p>
+			<% if review.rating != nil %>
+			<p><b>Overall Rating:</b> <%= render "stars", :rating => review.rating %></p>
+			<% end %>
+			<p> <%= review.review_text %>
+			<p> 
+			<% if review.feasibility != nil %> <b>Feasibility:</b> <%= review.feasibility %>.<% end %>
+			<% s = review.specific %>
+			<% if review.actable_type == "StudentReview" %>
+				<% if s.learning_score != nil %> <b>Learning Score: </b> <%= s.learning_score %>.<% end %>
+				<% if s.participate_in_future_projects != nil %> <b>Would participate in future projects: </b><%=s.participate_in_future_projects %>.<% end %>
+				<% if s.planning_score != nil %> <b>Planning score: </b><%= s.planning_score %>.<% end %>
+				<% if s.participants != nil %> <b>Participants: </b><%= s.participants %>.<% end %>
+			<% elsif review.actable_type == "TeacherReview" %>
+				<% if s.learning_effectiveness != nil %> <b>Learning Effectiveness:</b> <%= s.learning_effectiveness %>.<% end %>
+			<% else %>
+				<% if s.impact != nil %> <b>Community Impact: </b><%= s.impact %>.<% end %>
+				<% if s.participate_in_future_projects != nil %> <b>Would participate in future projects:</b> <%=s.participate_in_future_projects %>.<% end %>
+			<%end %>
+			</p>
+
 	      </div>
 	</div>
 	</div>
