@@ -10,7 +10,7 @@
 </thead>
 <% for project in projects %>
 	<tr>
-	<td><%= project.project_name %></td>
+	<td><%= link_to project.project_name, controller: "projects", action: "display", id: project.id %></td>
 	<td><%= project.course_subject%></td>
 	<td><%= project.expected_difficulty%></td>
 	<td>
