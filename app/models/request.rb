@@ -7,6 +7,16 @@ class Request < ActiveRecord::Base
 
 	def approve_request
 		self.status = :approved
+		p = self.project
+		if p != nil
+			p.approved = true
+			p.save
+		end
+		pi = self.project_instance
+		if pi != nil
+			pi.approved = true
+			pi.save
+		end
 	end
 
 	def deny_request
