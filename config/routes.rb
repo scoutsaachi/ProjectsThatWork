@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   get ':controller(/:action(/:id))'
   post ':controller(/:action(/:id))'
   root 'index#display'
+  if not Rails.env.development?
+    get '*unmatched_route', to: 'application#not_found'
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -11,20 +11,32 @@ class ProjectsController < ApplicationController
   end
 
   def display_category
-    @category = Category.find(params[:id])
-    @projects = @category.approvedProjects.sort_by {|p| -1*p.project_instances.size}
+    @category = Category.find_by_id(params[:id])
+    if @category == nil
+      not_found
+      return
+    end
+      @projects = @category.approvedProjects.sort_by {|p| -1*p.project_instances.size}
   end
 
 
   #id must be project id
   def display
-    @project = Project.find(params[:id])
+    @project = Project.find_by_id(params[:id])
+    if @project == nil
+      not_found
+      return
+    end
     @reviews = @project.reviews.order(updated_at: :desc).limit(5)
   end
 
   #id must be project instance id
   def display_instance
-    @project_instance = ProjectInstance.find(params[:id])
+    @project_instance = ProjectInstance.find_by_id(params[:id])
+    if @project_instance == nil
+      not_found
+      return
+    end
     @teacher_reviews = @project_instance.reviews.where(actable_type: "TeacherReview")
     @student_reviews = @project_instance.reviews.where(actable_type: "StudentReview")
     @organization_reviews = @project_instance.reviews.where(actable_type: "OrganizationReview")
