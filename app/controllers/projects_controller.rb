@@ -43,7 +43,7 @@ class ProjectsController < ApplicationController
   end
 
   def browse
-    @projects = Project.where(approved: true)
+    @projects = Project.approved
     if params[:expected_difficulty]
       @projects = @projects.where(expected_difficulty: params[:expected_difficulty])
     end

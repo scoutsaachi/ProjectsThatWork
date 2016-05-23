@@ -6,12 +6,14 @@ class Project < ActiveRecord::Base
   has_many :requests
   after_create :create_aggregate
 
+  enum status: [:pending, :approved, :denied]
+
   def create_aggregate
   	RatingAggregate.create(project_id: id)
   end
 
   def approvedInstances
-  	return self.project_instances.where(approved: true)
+  	return self.project_instances.approved
   end
 
   def numInstancesApproved

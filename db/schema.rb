@@ -48,9 +48,9 @@ ActiveRecord::Schema.define(version: 20160505063856) do
     t.string   "steps"
     t.string   "preparation"
     t.string   "reflection_activities"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
-    t.boolean  "approved",                default: false, null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.integer  "status",                  default: 0, null: false
   end
 
   create_table "projects", force: :cascade do |t|
@@ -59,9 +59,9 @@ ActiveRecord::Schema.define(version: 20160505063856) do
     t.string   "description"
     t.string   "expected_difficulty"
     t.string   "duration"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.boolean  "approved",            default: false, null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "status",              default: 0, null: false
   end
 
   create_table "rating_aggregates", force: :cascade do |t|
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20160505063856) do
     t.integer  "project_instance_id"
     t.integer  "user_id"
     t.integer  "status",              default: 0, null: false
+    t.string   "message"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
   end

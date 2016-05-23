@@ -1,0 +1,59 @@
+<% if @requests.size > 0 %>
+<%= form_tag({:controller => "request", :action => "post_approverequest"}, :method => "post") do %>
+<% @requests.each do |request| %>
+	<% headingID = "heading" + request.id.to_s %>
+	<% collapseID = "collapse" + request.id.to_s %>
+	<div>
+		<div class="panel panel-default">
+				<div style = "background-color: white" class="panel-heading" role="tab" id = <%= "#{headingID}" %> >
+					<h4>
+					<a data-toggle="collapse" data-parent="#accordion" href=<%= "#"+collapseID %> aria-expanded="false" aria-controls= <%= collapseID %> style = "text-decoration: none;">
+						Request: <%= request.updated_at%>
+					</a>
+					</h4>
+			</div>
+		</div>
+		<div id=<%= collapseID%> class="panel-collapse collapse" role="tabpanel" aria-labelledby=<%= headingID %>>
+		      <div class="panel-body">
+		      	<p> <%= label_tag("check#{request.id}", "Approve this request?") %>
+		      	<%= select_tag "check#{request.id}", options_for_select([["Do Nothing", "1"], ["Accept", "2"], ["Deny", "3"]], "Do Nothing") %>
+		    	<p> <%= label_tag("rev#{request.id}", "If this request was rejected, why was this request not approved?") %> </p>
+				<%= text_field_tag("rev#{request.id}", nil, size: "50x2") %>
+				<br><br>
+			<!-- Project -->
+				<% if request.project %>
+					<% p = request.project %>
+					<h4> <strong> Project: <%= p.project_name %> </strong></h4>
+					<p> <strong> Project Description: </strong> <%= p.description %> </p>
+					<p> <strong> Course Subject:</strong> <%= p.course_subject %>. <strong> Difficulty:</strong> <%= p.expected_difficulty %>. <strong>Duration:</strong> <%=p.duration%> </p>
+			    <% end %>
+
+		    <!-- Project Instance-->
+		    	<br>
+		    	<% if request.project_instance %>
+		    		<% pi = request.project_instance %>
+		    		<h4> <strong> Project Implementation:</strong></h4>
+					<p> <strong> School:</strong> <%= pi.school %>. <strong> Town:</strong> <%= pi.town %>. <strong> Course: </strong> <%= pi.course %>. <strong> Grade Level:</strong> <%= pi.grade_level %>. <strong> Number of Students:</strong> <%= pi.number_of_students %></p>
+					<p><strong>Time Frame:</strong> <%=pi.start_date%> - <%=pi.end_date%></p>
+					<p> <strong> Materials and Costs: </strong> <%= pi.materials_and_costs %> </p>
+					<p> <strong> Learning Goals: </strong> <%= pi.learning_goals %> </p>
+					<% if pi.community_participation %>
+						<p> <strong> Community Partners: </strong> <%= pi.community_partners%> </p>
+					<% else %>
+						<p> <strong> Community Partners: </strong> None </p>
+					<% end %>
+					<p> <strong> Steps: </strong> <%= pi.steps %> </p>
+					<p> <strong> Preparation: </strong> <%= pi.preparation %> </p>
+					<p> <strong> Reflection Activities: </strong> <%= pi.reflection_activities %> </p>
+		    	<% end %>
+
+		    </div>
+		</div>
+	</div>
+<% end %>
+<button type="submit" class="btn btn-primary">Submit</button>
+<% end %>
+</div>
+<% else %>
+<h4> No requests to approve! </h4>
+<% end %>
