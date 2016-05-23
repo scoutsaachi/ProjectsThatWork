@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160505051906) do
+ActiveRecord::Schema.define(version: 20160505063856) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "category_name"
@@ -48,8 +48,9 @@ ActiveRecord::Schema.define(version: 20160505051906) do
     t.string   "steps"
     t.string   "preparation"
     t.string   "reflection_activities"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.boolean  "approved",                default: false, null: false
   end
 
   create_table "projects", force: :cascade do |t|
@@ -58,8 +59,9 @@ ActiveRecord::Schema.define(version: 20160505051906) do
     t.string   "description"
     t.string   "expected_difficulty"
     t.string   "duration"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.boolean  "approved",            default: false, null: false
   end
 
   create_table "rating_aggregates", force: :cascade do |t|
@@ -75,6 +77,15 @@ ActiveRecord::Schema.define(version: 20160505051906) do
     t.float    "impact"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.integer  "project_id"
+    t.integer  "project_instance_id"
+    t.integer  "user_id"
+    t.integer  "status",              default: 0, null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "reviews", force: :cascade do |t|

@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
 
   def display_category
     @category = Category.find(params[:id])
-    @projects = @category.projects.sort_by {|p| -1*p.project_instances.size}
+    @projects = @category.projects.where(approved: true).sort_by {|p| -1*p.project_instances.size}
   end
 
   #post method for creating new project
@@ -56,7 +56,7 @@ class ProjectsController < ApplicationController
   end
 
   def browse
-    @projects = Project.all
+    @projects = Project.where(approved: true)
     if params[:expected_difficulty]
       @projects = @projects.where(expected_difficulty: params[:expected_difficulty])
     end

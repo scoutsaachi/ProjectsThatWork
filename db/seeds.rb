@@ -12,13 +12,13 @@ Category.create([{category_name: "Climate Change"}, {category_name: "Ecosystems"
 
 p = Project.create(project_name: "Understanding Coal Plants", course_subject: "Environmental Science", 
 	description: "Visit coal plants and suggest optimizations to reduce greenhouse gasses from coal", expected_difficulty: "College",
-	duration: 10)
+	duration: 10, approved: true)
 p.categories<< Category.find_by_category_name("Climate Change")
 p.categories << Category.find_by_category_name("Pollution")
 
 p = Project.create(project_name: "COP21: Understanding International Climate Treaties", course_subject: "Political Science", 
 	description: "Discuss the negotiations and results of the Paris COP21", expected_difficulty: "High School",
-	duration: 20)
+	duration: 20, approved: true)
 p.categories<< Category.find_by_category_name("Climate Change")
 p.categories << Category.find_by_category_name("Legal Systems")
 
@@ -26,7 +26,7 @@ pi = ProjectInstance.create(project_id: p.id, school: "The Harker School", town:
 	grade_level: 10, number_of_students: 20, start_date: "2015-01-29", end_date: "2015-02-19", 
 	materials_and_costs: "Posters, Computers", learning_goals: "-Learn how international treaties are negotiated \n -Discuss climate treaties since the Kyoto Protocol",
 	community_participation: false, community_partners: "", steps: "Simulate the international treaty, with each student playing a different country at COP21",
-	preparation: "Have students research their respective countries and their positions on climate change", reflection_activities: "Write a paper on the success of the simulated negotiation")
+	preparation: "Have students research their respective countries and their positions on climate change", reflection_activities: "Write a paper on the success of the simulated negotiation", approved: true)
 
 TeacherReview.create(review_text: "This project worked well, and was effective for students to learn about international treaties",
 	rating: 5, feasibility: 3, learning_effectiveness: 4, project_id: p.id, project_instance_id: pi.id)

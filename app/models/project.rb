@@ -3,6 +3,7 @@ class Project < ActiveRecord::Base
   has_many :project_instances
   has_many :reviews
   has_one :rating_aggregate
+  has_many :requests
   after_create :create_aggregate
 
   def create_aggregate
