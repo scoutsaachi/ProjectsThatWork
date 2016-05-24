@@ -38,7 +38,15 @@
             <li><a href="/projects/browse">Browse</a></li>
             <li><a href="#contact">Rate</a></li>
           </ul>
-          <% if user_signed_in? %>
+
+          <%if admin_signed_in? %>
+            <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %> </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+               <li><a href="/dashboard/display">Panel</a></li>
+            </ul>
+          <% elsif user_signed_in? %>
             <ul class="nav navbar-nav navbar-right">
               <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %> </li>
             </ul>
