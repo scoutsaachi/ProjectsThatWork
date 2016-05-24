@@ -34,3 +34,5 @@ TeacherReview.create(review_text: "This project worked well, and was effective f
 StudentReview.create(review_text: "I really learned a lot during this project and had fun portraying the country of Norway", 
 	rating: 4, feasibility: 5, learning_score: 3, participate_in_future_projects: 4, participants: "Alone", planning_score: 4, 
 	project_id: p.id, project_instance_id: pi.id)
+
+Admin.create([{email:"sahil_manu7@yahoo.com", password:"123456789", password_confirmation:"123456789"}])
