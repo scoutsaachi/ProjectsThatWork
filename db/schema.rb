@@ -11,6 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20160505063945) do
 
   create_table "admins", force: :cascade do |t|
@@ -30,6 +31,9 @@ ActiveRecord::Schema.define(version: 20160505063945) do
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+=======
+ActiveRecord::Schema.define(version: 20160505063856) do
+>>>>>>> 65dc019ea5cf2b61581c66f504664fde81cb9440
 
   create_table "categories", force: :cascade do |t|
     t.string   "category_name"
@@ -66,8 +70,9 @@ ActiveRecord::Schema.define(version: 20160505063945) do
     t.string   "steps"
     t.string   "preparation"
     t.string   "reflection_activities"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.integer  "status",                  default: 0, null: false
   end
 
   create_table "projects", force: :cascade do |t|
@@ -76,8 +81,9 @@ ActiveRecord::Schema.define(version: 20160505063945) do
     t.string   "description"
     t.string   "expected_difficulty"
     t.string   "duration"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "status",              default: 0, null: false
   end
 
   create_table "rating_aggregates", force: :cascade do |t|
@@ -93,6 +99,16 @@ ActiveRecord::Schema.define(version: 20160505063945) do
     t.float    "impact"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.integer  "project_id"
+    t.integer  "project_instance_id"
+    t.integer  "user_id"
+    t.integer  "status",              default: 0, null: false
+    t.string   "message"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "reviews", force: :cascade do |t|

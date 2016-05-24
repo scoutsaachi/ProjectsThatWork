@@ -4,12 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def authorize_admin!
-  	if current_user
-  		print "user logged in"
-  	else
-  		print "no user logged in"
-  	end
-   redirect_to :back, :status => 401 unless current_admin
+
+   redirect_to({controller: "index", :action => "display"}) unless current_admin
    #redirects to previous page
   end
 
@@ -22,6 +18,9 @@ class ApplicationController < ActionController::Base
  #      user_path(resource)
  #    end
  #  end
+  def not_found
+  	render file: "#{Rails.root}/public/404.html", layout: true, status: 404
+  end
 end
 
 

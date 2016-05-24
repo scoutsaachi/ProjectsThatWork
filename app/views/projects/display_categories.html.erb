@@ -8,7 +8,7 @@
 	<a href = <%="/projects/display_category/#{category.id}"%> class="list-group-item"> 
 		<h4>
 		<%= category.category_name %>
-		<span class="badge" style="float:right"><%= category.projects.size %></span>
+		<span class="badge" style="float:right"><%= category.numApprovedProjects %></span>
 		</h4>
 	</a>
 	<% end %>

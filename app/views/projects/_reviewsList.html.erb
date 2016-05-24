@@ -11,7 +11,7 @@
 	<% collapseID = "collapse" + review.id.to_s %>
 	<div>
 	<div class="panel panel-default">
-			<div class="panel-heading" role="tab" id = <%= "#{headingID}" %> >
+			<div style = "background-color: white" class="panel-heading" role="tab" id = <%= "#{headingID}" %> >
 				<h4>
 				<a data-toggle="collapse" data-parent="#accordion" href=<%= "#"+collapseID %> aria-expanded="false" aria-controls= <%= collapseID %> style = "text-decoration: none;">
 				<%= reviewType %>:</a> <%= render "stars", :rating => review.rating %></h4>

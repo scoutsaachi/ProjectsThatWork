@@ -1,0 +1,16 @@
+<h4> Create the overarching project. Other teachers, after viewing your project, can add their implementation to yours. If you wish to add to an existing project, find the project <a href="/projects/display_categories"> here </a> and add your implementation to the project. </h4>
+	
+<p><%= label_tag(:project_name, "Project Name:") %></p>
+<p><%= text_field_tag(:project_name) %></p>
+<p><%= label_tag(:course_subject, "Course Subject:") %></p>
+<p><%= text_field_tag(:course_subject) %></p>
+<p><%= label_tag(:description, "Project Description:") %></p>
+<p><%= text_area_tag(:description) %>  </p>
+<p><%= label_tag(:expected_difficulty, "Expected Difficulty:") %> </p>
+<p><%= select_tag :expected_difficulty, "<option>Lower School</option><option>Middle School</option><option>High School</option><option>Any</option>".html_safe %> </p>
+<p><%= label_tag(:duration, "Expected Duration(Days):") %> </p>
+<p><%= text_area_tag(:duration) %></p>
+<p><%= label_tag(:categories, "Additional Categories") %> </p>
+<p>
+<%= select_tag(:categories, options_from_collection_for_select(Category.all, "id", "category_name"), {multiple: true, class: 'form_control', style: 'width:50%'}) %> 
+</p>

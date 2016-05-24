@@ -1,0 +1,17 @@
+<% if user_signed_in? %>
+
+<div class="page-header">
+	<h1>Create an implementation of the project <%=@project.project_name %></h1>
+</div>
+
+<div style="text-align:center">
+<%= form_tag({:controller => "request", :action => "post_newinstance", :id => @project.id}, :method => "post") do %>
+	<!-- Create project -->
+	<%= render "newinstance" %>
+<button type="submit" class="btn btn-primary">Submit</button>
+<% end %>
+</div>
+
+<% else %>
+<h4> You need to login to see this page! </h4>
+<% end %>
