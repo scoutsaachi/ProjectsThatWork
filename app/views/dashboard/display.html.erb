@@ -1,3 +1,25 @@
 <div class="page-header">
 	<h1>Administrative Dashboard</h1>
+	<% if @users.size == 0%>
+	<h3>No Unauthorized Users</h3>
+	<% else %>
+	<h3>Pending Unauthorized Users</h3>
+	<table class="table">
+		<thead>
+			<tr>
+		      <th>User</th>
+		      <th>Authorize</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+			<% User.where(approved: false).each do |user| %>
+				<tr>
+					<th><%=user.email%></th>
+					<th><a class="btn btn-md btn-primary" href=<%="/dashboard/authorize_user/#{user.id}"%> role="button">Authorize</a></th>
+				</tr>
+			<% end %>		  	
+		  </tbody>
+	</table>	
+	<% end %>
+
 </div>
