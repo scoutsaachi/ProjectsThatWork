@@ -1,5 +1,5 @@
 <% if @requests.size > 0 %>
-<%= form_tag({:controller => "request", :action => "post_approverequest"}, :method => "post") do %>
+<%= form_tag({:controller => "dashboard", :action => "post_approverequest"}, :method => "post") do %>
 <% @requests.each do |request| %>
 	<% headingID = "heading" + request.id.to_s %>
 	<% collapseID = "collapse" + request.id.to_s %>

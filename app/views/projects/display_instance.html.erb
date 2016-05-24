@@ -97,7 +97,7 @@
           <%= render "reviewsList", :reviews => @teacher_reviews %>
           </div>
         <% end %>
-        <% if user_signed_in? %>
+        <% if loggedIn %>
         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createTeacherReview">
           Review this Project
         </button>
@@ -114,7 +114,7 @@
           <%= render "reviewsList", :reviews => @student_reviews %>
           </div>
         <% end %> 
-        <% if user_signed_in? %>
+        <% if loggedIn %>
         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createStudentReview">
          Review this Project
        </button>
@@ -131,7 +131,7 @@
         <%= render "reviewsList", :reviews => @organization_reviews %>
         </div>
       <% end %>
-      <% if user_signed_in? %>  	
+      <% if loggedIn %>  	
       <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createOrganizationReview">
        Review this Project
      </button>

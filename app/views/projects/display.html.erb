@@ -60,8 +60,7 @@
 	</ul>
 <% end %>
 
-<% if user_signed_in? %>
-<!-- Button trigger modal -->
+<% if loggedIn %>
 <h4>Add your own implementation to this project!</h4>
 <a class="btn btn-primary btn-lg" href=<%="/request/requestInstance/#{@project.id}"%> role="button">Add an implementation!</a>
 <% else %>
