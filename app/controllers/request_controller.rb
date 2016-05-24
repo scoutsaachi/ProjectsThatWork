@@ -68,15 +68,11 @@ class RequestController < ApplicationController
 		requests.each do |r|
 			checkLabel = "check#{r.id}"
 			revLabel = "rev#{r.id}"
-			case params[checkLabel]
-			when 2
-				#approved request
+			if params[checkLabel] == "2"
 				r.approve_request
-			when 2
-				#denied request
+			elsif params[checkLabel] == "3"
 				r.deny_request(params[revLabel])
 			else
-				#did nothing
 				next
 			end
 		end
