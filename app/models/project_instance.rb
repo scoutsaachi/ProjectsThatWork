@@ -5,6 +5,7 @@ class ProjectInstance < ActiveRecord::Base
 	belongs_to :project
 	has_one :rating_aggregate
 	after_create :create_aggregate
+	has_and_belongs_to_many :tags
 
 	enum status: [:pending, :approved, :denied]
 

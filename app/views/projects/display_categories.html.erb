@@ -14,7 +14,7 @@
 	<% end %>
 </ul>
 
-<% if loggedIn %>
+<% if admin_signed_in? || user_signed_in %>
 <%= form_tag({:controller => "projects", :action => "post_newcategory"}, :method => "post") do %>
 	<%= label_tag(:category_name, "Create new Category:") %>
 	<%= text_field_tag(:category_name) %>

@@ -10,7 +10,7 @@
 <p><%= select_tag :expected_difficulty, "<option>Lower School</option><option>Middle School</option><option>High School</option><option>Any</option>".html_safe %> </p>
 <p><%= label_tag(:duration, "Expected Duration(Days):") %> </p>
 <p><%= text_area_tag(:duration) %></p>
-<p><%= label_tag(:categories, "Additional Categories") %> </p>
+<p><%= label_tag(:categories, "Categories") %> </p>
 <p>
-<%= select_tag(:categories, options_from_collection_for_select(Category.all, "id", "category_name"), {multiple: true, class: 'form_control', style: 'width:50%'}) %> 
+<%= select_tag(:categories, options_from_collection_for_select(Category.all.order_by(:category_name), "id", "category_name"), {multiple: true, class: 'form_control', style: 'width:50%'}) %> 
 </p>

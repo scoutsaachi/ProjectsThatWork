@@ -36,3 +36,14 @@
 
 	<p> <%= label_tag(:reflection_activities, "What reflection activities were done to conclude the project:") %> </p>
 	<p> <%= text_area_tag(:reflection_activities, nil, size: "30x5") %> </p>
+
+	<p><%= label_tag(:tags, "Tags") %> </p>
+	<p>
+	<%= select_tag(:tags, options_from_collection_for_select(Tag.all.order_by(:tag_name), "id", "tag_name"), {multiple: true, class: 'form_control', style: 'width:50%'}) %> 
+	</p>
+
+	<p> <%= label_tag(:newTags, "Or create your own tags! Separate tags by commas") %> </p>
+	<p> <%= text_field_tag(:newTags) %> </p>
+
+
+

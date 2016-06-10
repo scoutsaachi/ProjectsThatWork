@@ -60,7 +60,7 @@
 	</ul>
 <% end %>
 
-<% if loggedIn %>
+<% if admin_signed_in? || user_signed_in %>
 <h4>Add your own implementation to this project!</h4>
 <a class="btn btn-primary btn-lg" href=<%="/request/requestInstance/#{@project.id}"%> role="button">Add an implementation!</a>
 <% else %>

@@ -14,12 +14,30 @@ class RequestController < ApplicationController
 	      params[:community_partners] = (params[:community_partners] == "Yes")
 	    end
 
-	   	ProjectInstance.create(project_id: params[:id], school: params[:school], town: params[:town], course: params[:course],
+	   	pi = ProjectInstance.create(project_id: params[:id], school: params[:school], town: params[:town], course: params[:course],
 	     grade_level: params[:grade_level], number_of_students: params[:number_of_students], start_date: params[:start_date],end_date: params[:end_date],
 	     materials_and_costs: params[:materials_and_costs], learning_goals: params[:learning_goals], community_participation: params[:community_participation],
 	     community_partners: params[:community_partners], steps: params[:steps], preparation: params[:preparation],reflection_activities: params[:reflection_activities])
 	   	flash[:notice] = "Your request is pending admin approval! We'll let you know by email when it's approved"
     	redirect_to({controller: "projects", :action => "display", :id => params[:id]})
+
+    	if params[:tags]
+	    	for tagId in params[:tags]
+	    		t = Tag.find(tagId)
+	    		pi.tags << t
+	    	end
+	    end
+
+	    if params[:newTags]
+	    	newtags = params[:newTags].split(",")
+	    	for name in newTags
+	    		name = name.strip.titlecase
+	    		t = Tag.create(tag_name: name, approved: false)
+	    		pi.tags << t
+	    	end
+	    end
+	    pi.save
+
 	end
 
 	#create both a project and a project instance
@@ -27,17 +45,13 @@ class RequestController < ApplicationController
 		# Create a new project
 		p = Project.create(project_name: params[:project_name], course_subject: params[:course_subject], description: params[:description],
         expected_difficulty: params[:expected_difficulty], duration: params[:duration])
-	    if params[:id] == nil
-	      params[:id] = 1
-	    end
 	    if params[:categories]
 	      for categoryID in params[:categories]
 	        c = Category.find(categoryID)
 	        p.categories << c
 	      end
 	    end
-	    c = Category.find(params[:id])
-	    p.categories << c
+	    p.save
 
 		# Create a new project instance
 		if params[:community_partners]
@@ -48,6 +62,24 @@ class RequestController < ApplicationController
 	     grade_level: params[:grade_level], number_of_students: params[:number_of_students], start_date: params[:start_date],end_date: params[:end_date],
 	     materials_and_costs: params[:materials_and_costs], learning_goals: params[:learning_goals], community_participation: params[:community_participation],
 	     community_partners: params[:community_partners], steps: params[:steps], preparation: params[:preparation],reflection_activities: params[:reflection_activities])
+
+	    if params[:tags]
+	    	for tagId in params[:tags]
+	    		t = Tag.find(tagId)
+	    		pi.tags << t
+	    	end
+	    end
+
+	    if params[:newTags]
+	    	newtags = params[:newTags].split(",")
+	    	for name in newTags
+	    		name = name.strip.titlecase
+	    		t = Tag.create(tag_name: name, approved: false)
+	    		pi.tags << t
+	    	end
+	    end
+
+	    pi.save
 
 	    # Create a request
 	    Request.new_request(current_user, p.id, pi.id)

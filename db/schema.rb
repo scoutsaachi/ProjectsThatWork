@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160505063945) do
+ActiveRecord::Schema.define(version: 20160610172106) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -127,6 +127,18 @@ ActiveRecord::Schema.define(version: 20160505063945) do
     t.string   "gender"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "tag_name"
+    t.boolean  "approved"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tags_project_instances", force: :cascade do |t|
+    t.integer "tag_id"
+    t.integer "project_instance_id"
   end
 
   create_table "teacher_reviews", force: :cascade do |t|

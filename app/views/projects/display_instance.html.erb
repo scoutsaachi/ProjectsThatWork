@@ -21,6 +21,10 @@
   </div>
 
   <div class="row">
+    <div class="col-md-12"><p> <strong> Keywords: </strong><%= @project_instance.tags.where(approved: true).join(", ") %> </p></div>
+  </div>
+
+  <div class="row">
     <div class="col-md-12"><p> <strong> Learning Goals: </strong><%= @project_instance.learning_goals %> </p></div>
   </div>
   <div class="row">
@@ -97,7 +101,7 @@
           <%= render "reviewsList", :reviews => @teacher_reviews %>
           </div>
         <% end %>
-        <% if loggedIn %>
+        <% if admin_signed_in? || user_signed_in %>
         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createTeacherReview">
           Review this Project
         </button>
@@ -114,7 +118,7 @@
           <%= render "reviewsList", :reviews => @student_reviews %>
           </div>
         <% end %> 
-        <% if loggedIn %>
+        <% if admin_signed_in? || user_signed_in %>
         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createStudentReview">
          Review this Project
        </button>
@@ -131,7 +135,7 @@
         <%= render "reviewsList", :reviews => @organization_reviews %>
         </div>
       <% end %>
-      <% if loggedIn %>  	
+      <% if admin_signed_in? || user_signed_in %>  	
       <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createOrganizationReview">
        Review this Project
      </button>
