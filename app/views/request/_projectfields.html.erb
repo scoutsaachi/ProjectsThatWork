@@ -1,0 +1,10 @@
+<h4> Create the overarching project. Other teachers, after viewing your project, can add their implementation to yours. If you wish to add to an existing project, find the project <a href="/projects/display_categories"> here </a> and add your implementation to the project. </h4>
+
+<%= f.inputs do %>
+	<%= f.input :project_name %>
+	<%= f.input :course_subject %>
+	<%= f.input :description %>
+	<%= f.input :expected_difficulty %>
+	<%= f.input :expected_duration%>
+	<%= f.input :categories, :as => :select, :collection => Category.all %>
+<% end %>

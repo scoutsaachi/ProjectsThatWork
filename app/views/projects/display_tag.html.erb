@@ -1,0 +1,20 @@
+<div class="page-header">
+	<h1>Tag: <%= @tag.tag_name %></h1>
+</div>
+<% if @project_instances.size == 0 %>
+	<p class="lead"><%= @tag.tag_name %> has never been used!</p>
+<% else %>
+	<p class="lead"><%= @tag.tag_name %> has been used in the following projects</p>
+	<ul class="list-group">
+	<% @project_instances.each do |pi| %>
+		<a href = <%="/projects/display_instance/#{pi.id}"%> class="list-group-item"> 
+			<h4>
+				<% titlestring = "An implementation of #{pi.project.project_name}" %>
+				<% titlestring += pi.school.present? ? " by #{pi.school}" : "" %>
+				<% titlestring += pi.town.present? ? " in #{pi.town}" : "" %>
+				<%= titlestring %>
+			</h4>
+		</a>
+		<% end %>
+	</ul>
+<% end %>

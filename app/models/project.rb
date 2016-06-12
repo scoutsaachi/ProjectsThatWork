@@ -5,6 +5,7 @@ class Project < ActiveRecord::Base
   has_one :rating_aggregate
   has_many :requests
   after_create :create_aggregate
+  accepts_nested_attributes_for :project_instances
 
   enum status: [:pending, :approved, :denied]
 

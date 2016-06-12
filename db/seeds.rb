@@ -6,37 +6,52 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Category.create([{category_name: "Climate Change"}, {category_name: "Ecosystems"}, {category_name: "Legal Systems"}, {category_name: "Prisons"},
-	{category_name: "Government"}, {category_name: "Theater"}, {category_name: "Archaeology"}, {category_name: "Code for Non-Profits"}, 
-	{category_name: "Pollution"}, {category_name: "Acid Rain"}, {category_name: "National Parks"}, {category_name: "Rainforests"}])
+Category.create([{category_name: "Education"}, {category_name: "Environment"}, {category_name: "Peace studies"}, 
+	{category_name: "Public Health"}, {category_name: "School Gardens"}, {category_name: "Social service for those in need"}, 
+	{category_name: "Sports"}, {category_name: "Sustainable Farming"}, {category_name: "Veterans"}])
 
-p = Project.create(project_name: "Understanding Coal Plants", course_subject: "Environmental Science", 
-	description: "Visit coal plants and suggest optimizations to reduce greenhouse gasses from coal", expected_difficulty: "College",
-	duration: 10, status: 1)
-p.categories<< Category.find_by_category_name("Climate Change")
-p.categories << Category.find_by_category_name("Pollution")
+Tag.create([{tag_name: "Building Structures", approved: true}, {tag_name: "Bullying", approved: true}, 
+	{tag_name: "Climate change", approved: true}, {tag_name: "Coaching", approved: true}, 
+	{tag_name: "Collecting/Donating", approved: true}, {tag_name: "Food pantry", approved: true},
+	 {tag_name: "Habitat restoration", approved: true}, {tag_name: "Healthy lifestyle", approved: true}, 
+	 {tag_name: "Mentoring", approved: true}, {tag_name: "Nutrition", approved: true}, 
+	 {tag_name: "Organ donation", approved: true}, {tag_name: "Photography exhibit", approved: true}, 
+	 {tag_name: "Planting trees", approved: true}, {tag_name: "Public Service Announcement ", approved: true}, 
+	 {tag_name: "Publication", approved: true}, {tag_name: "Raising animals", approved: true}, 
+	 {tag_name: "Raising produce", approved: true}, {tag_name: "Ran Fundraiser", approved: true}, 
+	 {tag_name: "Reading", approved: true}, {tag_name: "Recycling", approved: true}, 
+	 {tag_name: "Rights (human, civil, women’s)", approved: true}, {tag_name: "Safe Driving", approved: true},
+	  {tag_name: "Substance abuse", approved: true}, {tag_name: "Sustainability, environment", approved: true}, 
+	  {tag_name: "Tutoring", approved: true}, {tag_name: "Video Production", approved: true}, 
+	  {tag_name: "Conflict resolution", approved: true}, {tag_name: "War", approved: true}])
 
-p = Project.create(project_name: "COP21: Understanding International Climate Treaties", course_subject: "Political Science", 
-	description: "Discuss the negotiations and results of the Paris COP21", expected_difficulty: "High School",
-	duration: 20, status: 1)
-p.categories<< Category.find_by_category_name("Climate Change")
-p.categories << Category.find_by_category_name("Legal Systems")
+p = Project.create(project_name: "Elementary School Tutoring", course_subject: "Language Arts", 
+	description: "Students tutored younger elementary school students in reading.",
+	expected_difficulty: "Middle School", expected_duration: 10, status: 1)
+p.categories << Category.find_by_category_name("Education")
 
-pi = ProjectInstance.create(project_id: p.id, school: "The Harker School", town: "San Jose", course: "AP Government", 
-	grade_level: 10, number_of_students: 20, start_date: "2015-01-29", end_date: "2015-02-19", 
-	materials_and_costs: "Posters, Computers", learning_goals: "-Learn how international treaties are negotiated \n -Discuss climate treaties since the Kyoto Protocol",
-	community_participation: false, community_partners: "", steps: "Simulate the international treaty, with each student playing a different country at COP21",
-	preparation: "Have students research their respective countries and their positions on climate change", reflection_activities: "Write a paper on the success of the simulated negotiation", status: 1)
+pi = ProjectInstance.create(course: "Language Arts", grade_level: "Middle School", duration: 10,
+ project_notes: "Project kicked off during \"Teen Reads Week\" week full of literature themed days.",
+ materials_and_costs: "Total Cost: 3045. Breakdown: Transportation: $120; Books: $1,500; Snacks: $250; T-shirt: $400; Materials: $200; Gas and Mileage: $75; Incentives: $400; Decorations: $100",
+ learning_goals:"ELACC7RL 1: Cite textual evidence to support analysis as well as inferences drawn from the text.\n
+ELACC7RL2: Determine a theme of a text and analyze its development over the course of the text; provide an objective summary of the text. *ELACC7W4: Produce clear and coherent writing in which the development, organization, and style are appropriate to task, purpose, and audience. *ELACC7SL1: Engage in a range of collaborative discussions (one-on-one, in groups, and teacher-led) with diverse partners on grade 7 topics, texts, and issues, building on others’ ideas and expressing their own clearly. re defined in standards 1–3 above.",
+ community_participation: true,
+ steps: "Teacher and class discussed the type of reading activities that would be exciting for younger students; came up with activities and books for the younger students, and conveyed important ideas.",
+ preparation: "Students performed research \n Students read content on the topic \n Teacher presentations \n Class discussion of learning goals \n class discussion of implementation",
+ reflection_activities: "Assessed learning outcomes \n Discussed with class",
+ status: 1
+ )
+pi.project_id = p.id
+pi.save
+pi.tags << Tag.find_by_tag_name("Tutoring")
+pi.tags << Tag.find_by_tag_name("Reading")
 
-TeacherReview.create(review_text: "This project worked well, and was effective for students to learn about international treaties",
-	rating: 5, feasibility: 3, learning_effectiveness: 4, project_id: p.id, project_instance_id: pi.id)
+TeacherReview.create(rating: 4, review_text: "\"They were so moved by what they were doing, they requested to expand the program to first graders as well. Teachers at our feeder school were inspired by the acts of service from the older students. They said they had never seen anything like that done at their school before. They were appreciative of the collaboration. They were so moved by what they were doing, they requested to expand the program to first graders as well.\"", feasibility: 3, learning_effectiveness: 5, project_id: p.id, project_instance_id: pi.id)
+StudentReview.create(rating: 5, review_text: "\"This project is a life changing experience for me and the students that I helped. I hope that the students learned from this experience. I think that students will engage more in reading. I really enjoyed helping other kids learning to read because it can help them in the future. Getting kids loving to read means a lot to me.\"", feasibility: 4, learning_score: 4, participate_in_future_projects: 4.5, project_id: p.id, project_instance_id: pi.id)
 
-StudentReview.create(review_text: "I really learned a lot during this project and had fun portraying the country of Norway", 
-	rating: 4, feasibility: 5, learning_score: 3, participate_in_future_projects: 4, participants: "Alone", planning_score: 4, 
-	project_id: p.id, project_instance_id: pi.id)
 
-<<<<<<< HEAD
-	Admin.create([{email:"sahil_manu7@yahoo.com", password:"123456789", password_confirmation:"123456789"}])
-=======
-Admin.create([{email:"sahil_manu7@yahoo.com", password:"123456789", password_confirmation:"123456789"}])
->>>>>>> e6c9f26d157d1618bb2a99747555b26381b14f46
+
+
+User.create([{email:"example@gmail.com", password: "projects-that-work", password_confirmation: "projects-that-work"}])
+
+Admin.create([{email:"ctc.projects.that.work@gmail.com", password:"projects-that-work", password_confirmation:"projects-that-work"}])

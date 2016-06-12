@@ -17,34 +17,23 @@
 		      <div class="panel-body">
 		      	<p> <%= label_tag("check#{request.id}", "Approve this request?") %>
 		      	<%= select_tag "check#{request.id}", options_for_select([["Do Nothing", "1"], ["Accept", "2"], ["Deny", "3"]], "Do Nothing") %>
-		    	<p> <%= label_tag("rev#{request.id}", "If this request was rejected, why was this request not approved?") %> </p>
-				<%= text_field_tag("rev#{request.id}", nil, size: "50x2") %>
-				<br><br>
+		      	<p> If this request was rejected, why was this request not approved? </p>
+				<%= text_field_tag("rev#{request.id}", nil, size: "50x2", placeholder: "Place Reason Here") %>
 			<!-- Project -->
 				<% if request.project %>
+					<hr>
+					<h4> Project Info </h4>
 					<% p = request.project %>
-					<h4> <strong> Project: <%= p.project_name %> </strong></h4>
-					<p> <strong> Project Description: </strong> <%= p.description %> </p>
-					<p> <strong> Course Subject:</strong> <%= p.course_subject %>. <strong> Difficulty:</strong> <%= p.expected_difficulty %>. <strong>Duration:</strong> <%=p.duration%> </p>
+					<%= render :partial => "/request/requestProjectDisplay", :locals => {:p => p} %>
+					<hr>
 			    <% end %>
 
 		    <!-- Project Instance-->
-		    	<br>
 		    	<% if request.project_instance %>
 		    		<% pi = request.project_instance %>
-		    		<h4> <strong> Project Implementation:</strong></h4>
-					<p> <strong> School:</strong> <%= pi.school %>. <strong> Town:</strong> <%= pi.town %>. <strong> Course: </strong> <%= pi.course %>. <strong> Grade Level:</strong> <%= pi.grade_level %>. <strong> Number of Students:</strong> <%= pi.number_of_students %></p>
-					<p><strong>Time Frame:</strong> <%=pi.start_date%> - <%=pi.end_date%></p>
-					<p> <strong> Materials and Costs: </strong> <%= pi.materials_and_costs %> </p>
-					<p> <strong> Learning Goals: </strong> <%= pi.learning_goals %> </p>
-					<% if pi.community_participation %>
-						<p> <strong> Community Partners: </strong> <%= pi.community_partners%> </p>
-					<% else %>
-						<p> <strong> Community Partners: </strong> None </p>
-					<% end %>
-					<p> <strong> Steps: </strong> <%= pi.steps %> </p>
-					<p> <strong> Preparation: </strong> <%= pi.preparation %> </p>
-					<p> <strong> Reflection Activities: </strong> <%= pi.reflection_activities %> </p>
+		    		<h4> Implementation Info </h4>
+		    		<%= render :partial => "/request/requestInstanceDisplay", :locals => {:pi => pi} %>
+					<hr>
 		    	<% end %>
 
 		    </div>

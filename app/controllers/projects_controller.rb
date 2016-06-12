@@ -1,4 +1,14 @@
 class ProjectsController < ApplicationController
+
+  def display_tag
+    @tag = Tag.find_by_id(params[:id])
+    if @tag == nil
+      not_found
+      return
+    end
+    @project_instances = @tag.project_instances
+  end
+
   #display all categories
   def display_categories
     @categories = Category.all.sort_by{|c| -1*c.projects.size}

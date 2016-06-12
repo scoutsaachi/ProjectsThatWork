@@ -14,12 +14,10 @@
 	<% end %>
 </ul>
 
-<% if admin_signed_in? || user_signed_in %>
-<%= form_tag({:controller => "projects", :action => "post_newcategory"}, :method => "post") do %>
-	<%= label_tag(:category_name, "Create new Category:") %>
-	<%= text_field_tag(:category_name) %>
-	<%= submit_tag("Submit", {class: "btn btn-primary"})%>
-<% end %>
-<% else %>
-<h4> Login to create a new category </h4>
+<% if admin_signed_in? %>
+	<%= form_tag({:controller => "projects", :action => "post_newcategory"}, :method => "post") do %>
+		<%= label_tag(:category_name, "Create new Category:") %>
+		<%= text_field_tag(:category_name) %>
+		<%= submit_tag("Submit", {class: "btn btn-primary"})%>
+	<% end %>
 <% end %>

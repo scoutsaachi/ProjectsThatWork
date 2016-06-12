@@ -1,0 +1,36 @@
+<h4> Tell us how your school, specifically, implemented this project. Be detailed! </h4>
+<%= pi.inputs do %>
+	<%= pi.input :school %>
+	<%= pi.input :town %>
+	<%= pi.input :course %>
+	<%= pi.input :grade_level %>
+	<%= pi.input :number_of_students %>
+	<%= pi.input :duration %>
+	<%= pi.input :duration_notes %>
+	<%= pi.input :community_participation, :label => "Community Participation?" %>
+	<%= pi.input :community_partners %>
+	<%= pi.input :tags, :as => :select, :collection => Tag.all.where(approved: true) %>
+	<%= pi.input :newTags %>
+	<%= label_tag(:project_notes, "Project Description") %>
+	<%= pi.input :project_notes, as: :text, label: false, :input_html => { :class => 'autogrow', :rows => 3, :cols => 40, :maxlength => 10  } %>
+
+	<%= label_tag(:materials_and_costs, "Materials and Costs") %>
+	<%= pi.input :materials_and_costs, as: :text, label: false, :input_html => { :class => 'autogrow', :rows => 3, :cols => 40, :maxlength => 10  } %>
+
+	<%= label_tag(:learning_goals, "Learning Goals") %>
+	<%= pi.input :learning_goals, as: :text, label: false, :input_html => { :class => 'autogrow', :rows => 3, :cols => 40, :maxlength => 10  } %>
+
+	<%= label_tag(:steps, "Steps") %>
+	<%= pi.input :steps, as: :text, label: false, :input_html => { :class => 'autogrow', :rows => 3, :cols => 40, :maxlength => 10  } %>
+
+	<%= pi.input :preparation, :as => :check_boxes, :collection => ["Students performed research", "Students read content on the topic", "Teacher presentations", "Community presentations", "Student presentations", "Class discussion of learning goals", "Class discussion of implementation"] %>
+
+	<%= label_tag(:other_preparation, "Other Preparation") %>
+	<%= pi.input :other_preparation, as: :text, label: false, :input_html => { :class => 'autogrow', :rows => 3, :cols => 40, :maxlength => 10  }%>
+
+
+	<%= pi.input :reflection_activities, :as => :check_boxes, :collection => ["Assessed learning outcomes", "Discussed with class", "Presentations to class", "Presentations to school", "Presentations to community", "Students read content", "Reflective writing", "Advocacy for change"] %>
+
+	<%= label_tag(:other_reflection, "Other Reflection") %>
+	<%= pi.input :other_reflection_activities, as: :text, label: false, :input_html => { :class => 'autogrow', :rows => 3, :cols => 40, :maxlength => 10  }%>
+<% end %>

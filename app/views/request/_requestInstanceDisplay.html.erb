@@ -1,0 +1,20 @@
+<p><strong>School:</strong> <%= pi.school%></p>
+<p><strong>Town:</strong> <%= pi.town%></p>
+<p><strong>Course:</strong> <%= pi.course%></p>
+<p><strong>Grade Level:</strong> <%= pi.grade_level%></p>
+<p><strong>Number Of Students:</strong> <%= pi.number_of_students%></p>
+<p><strong>Duration:</strong> <%= pi.duration%></p>
+<p><strong>Notes about Duration:</strong> <%= pi.duration_notes%></p>
+<p><strong>Notes abotu Project:</strong> <%= pi.project_notes%></p>
+<p><strong>Costs:</strong> <%= pi.materials_and_costs%></p>
+<p><strong>Learning Goals:</strong> <%= pi.learning_goals%></p>
+<p><strong>Community Participation:</strong> <%= pi.community_participation%></p>
+<p><strong>Community Partners:</strong> <%= pi.community_partners%></p>
+<p><strong>Steps:</strong> <%= pi.steps%></p>
+<p><strong>Preparation:</strong></p> <%= pi.preparation%></p>
+<p><strong>Other Preparation Notes:</strong> <%= pi.other_preparation%></p>
+<p><strong>Reflection:</strong></p> <%= pi.reflection_activities%></p>
+<p><strong>Other Reflection Notes:</strong> <%= pi.other_reflection_activities%></p>
+<p><strong> Tags: </strong> <% pi.tags.each do |t| %>
+  			<%= link_to t.tag_name, controller: "projects", action: "display_tag", id: t.id %>, 
+  		<%end%> </p>

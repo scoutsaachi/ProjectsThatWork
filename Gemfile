@@ -45,6 +45,10 @@ gem 'autoprefixer-rails'
 
 gem 'devise'
 
+gem 'formtastic', '~> 3.0'
+
+
+
 # gem 'multiple_table_inheritance', '~> 0.2.1' 
 gem 'active_record-acts_as'
 

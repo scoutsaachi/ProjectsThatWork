@@ -57,18 +57,27 @@ ActiveRecord::Schema.define(version: 20160610172106) do
     t.string   "course"
     t.integer  "grade_level"
     t.integer  "number_of_students"
-    t.date     "start_date"
-    t.date     "end_date"
+    t.integer  "duration"
+    t.string   "duration_notes"
+    t.string   "project_notes"
     t.string   "materials_and_costs"
     t.string   "learning_goals"
     t.boolean  "community_participation"
     t.string   "community_partners"
     t.string   "steps"
     t.string   "preparation"
+    t.string   "other_preparation"
     t.string   "reflection_activities"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.integer  "status",                  default: 0, null: false
+    t.string   "other_reflection_activities"
+    t.string   "newTags"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.integer  "status",                      default: 0, null: false
+  end
+
+  create_table "project_instances_tags", force: :cascade do |t|
+    t.integer "project_instance_id"
+    t.integer "tag_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -76,7 +85,7 @@ ActiveRecord::Schema.define(version: 20160610172106) do
     t.string   "course_subject"
     t.string   "description"
     t.string   "expected_difficulty"
-    t.string   "duration"
+    t.integer  "expected_duration"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.integer  "status",              default: 0, null: false
@@ -134,11 +143,6 @@ ActiveRecord::Schema.define(version: 20160610172106) do
     t.boolean  "approved"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "tags_project_instances", force: :cascade do |t|
-    t.integer "tag_id"
-    t.integer "project_instance_id"
   end
 
   create_table "teacher_reviews", force: :cascade do |t|

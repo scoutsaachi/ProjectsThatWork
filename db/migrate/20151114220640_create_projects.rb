@@ -5,7 +5,7 @@ class CreateProjects < ActiveRecord::Migration
       t.string :course_subject
       t.string :description
       t.string :expected_difficulty
-      t.string :duration
+      t.integer :expected_duration
       t.timestamps null: false
     end
   end

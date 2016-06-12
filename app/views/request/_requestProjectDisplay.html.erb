@@ -1,0 +1,8 @@
+<p><strong>Name: <%= p.project_name %></strong></p>
+<p><strong>Description: <%= p.description %></strong></p>
+<p><strong>Subject:</strong> <%= p.course_subject %></p>
+<p><strong>Grade Level:</strong> <%= p.expected_difficulty %></p>
+<p><strong>Expected Duration:</strong> <%= p.expected_duration %></p>
+<p><strong> Categories: </strong> <% p.categories.each do |category| %>
+	<%= link_to category.category_name, controller: "projects", action: "display_category", id: category.id %>, 
+<%end%> </p>

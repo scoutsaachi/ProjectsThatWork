@@ -1,89 +1,141 @@
 <div class="page-header">
-	<h1><%= @project_instance.project.project_name %> at <%= @project_instance.school %> in <%= @project_instance.town %> </h1>
+	<h1>An implementation of <%= link_to @project_instance.project.project_name, controller: "projects", action: "display", id: @project_instance.project.id %> </h1>
 </div>
 
-<div class="jumbotron" style = "background:#F8F8F8">
-  	<div style = "text-align:center">
-     <h2><%= @project_instance.project.project_name %></h2>
-     <h3><%= @project_instance.start_date%> to <%=@project_instance.end_date%></h3>
-   </div>
-   <br>
 
-   <div class="row">
-     <div class="col-md-4"><p><strong>School:</strong> <%= @project_instance.school %></p></div>
-     <div class="col-md-4"><p><strong>Town:</strong> <%= @project_instance.town %></p></div>
-     <div class="col-md-4"><p><strong>Course:</strong> <%= @project_instance.course %></p></div>
-   </div>
-  <div class="row">
-    <div class="col-md-4"><p> <strong> Grade:</strong> <%= @project_instance.grade_level %> </p></div>
-    <div class="col-md-4"><p> <strong> Students:</strong> <%= @project_instance.number_of_students %> </p></div>
-    <div class="col-md-4"><p> <b>Community Partners:</b> <%= @project_instance.community_partners %> </p></div>
-  </div>
+<table style="width:100%" valign="top">
+  <tr>
+    <td class = "leftTable">
 
-  <div class="row">
-    <div class="col-md-12"><p> <strong> Keywords: </strong><%= @project_instance.tags.where(approved: true).join(", ") %> </p></div>
-  </div>
+<h3> Key Facts </h3> 
+<% if @project_instance.school.present? %>
+  <p><strong>School:</strong> <%= @project_instance.school %></p>
+<% end %>
 
-  <div class="row">
-    <div class="col-md-12"><p> <strong> Learning Goals: </strong><%= @project_instance.learning_goals %> </p></div>
-  </div>
-  <div class="row">
-    <div class="col-md-12"><p> <strong>Materials and Costs:</strong> <%= @project_instance.materials_and_costs %> </p></div>
-  </div>
-  <div class="row">
-    <div class="col-md-12"><p> <strong>Preparation:</strong> <%= @project_instance.preparation %> </p></div>
-  </div>
-  <div class="row">
-    <div class="col-md-12"><p> <strong>Steps:</strong> <%= @project_instance.steps %> </p></div>
-  </div>
-  <div class="row">
-    <div class="col-md-12"><p> <strong>Reflection Activities: </strong><%= @project_instance.reflection_activities %> </p></div>
-  </div>
+<% if @project_instance.town.present? %>
+  <p><strong>Course:</strong> <%= @project_instance.town %></p>
+<% end %>
 
+<% if @project_instance.course.present? %>
+  <p><strong>Course:</strong> <%= @project_instance.course %></p>
+<% end %>
 
-  <% r = @project_instance.rating_aggregate %>
-  <div class="row">
-    <% if r.rating != nil %>
-      <div class = "col-md-6"><p><strong>Overall Rating:</strong> <%= render "stars", :rating => r.rating.round %></p></div>
-    <% end %>
-    <% if r.feasibility != nil %>
-      <div class = "col-md-6"><p><strong>Feasibility:</strong> <%= render "stars", :rating => r.feasibility.round %></p></div>
-    <% end %>
-  </div>
-  <div class="row">
-    <% if r.learning_effectiveness != nil %>
-      <div class = "col-md-6"><p><strong>Achieved Learning Goals:</strong> <%= render "stars", :rating => r.learning_effectiveness.round %></p></div>
-    <% end %>
-    <% if r.learning_score != nil %>
-      <div class = "col-md-6"><p><strong>Student Learning Score:</strong> <%= render "stars", :rating => r.learning_score.round %></p></div>
-    <% end %>
-  </div>
-  <div class="row">
-    <% if r.planning_score != nil %>
-      <div class = "col-md-6"><p><strong>Student involvement in planning:</strong> <%= render "stars", :rating => r.planning_score.round %></p></div>
-    <% end %>
-    <% if r.students_future_projects != nil %>
-      <div class = "col-md-6"><p><strong>Would students participate again:</strong> <%= render "stars", :rating => r.students_future_projects.round %></p></div>
-    <% end %>
-  </div>
-  <div class="row">
-    <% if r.impact != nil %>
-      <div class = "col-md-6"><p><strong>Community Impact:</strong> <%= render "stars", :rating => r.impact.round %></p></div>
-    <% end %>
-    <% if r.org_future_projects != nil %>
-      <div class = "col-md-6"><p><strong>Would Community Partners participate again:</strong> <%= render "stars", :rating => r.org_future_projects.round %></p></div>
-    <% end %>
-  </div>
+<% if @project_instance.grade_level.present? %>
+  <p><strong>Grade Level:</strong> <%= @project_instance.grade_level %></p>
+<% end %>
 
+<% if @project_instance.number_of_students.present? %>
+  <p><strong> Number of Students: </strong> <%= @project_instance.number_of_students %> </p>
+<% end %>
 
+<% if @project_instance.duration.present? %>
+  <p><strong>Duration</strong> <%= @project_instance.duration %></p>
+<% end %>
 
-</div>
+<% if @project_instance.duration_notes.present? %>
+  <p><strong>Duration Notes</strong> <%= @project_instance.duration_notes %></p>
+<% end %>
 
-<div>
+<% if @project_instance.project_notes.present? %>
+  <p><strong>Project notes</strong> <%= @project_instance.project_notes %></p>
+<% end %>
 
+<% if @project_instance.community_participation != nil %>
+  <p><strong>Did the community participate?</strong> <%= @project_instance.community_participation ? "Yes" : "No" %></p>
+<% end %>
 
-  <div>
+<% if @project_instance.community_participation && @project_instance.community_partners.present? %>
+  <p><strong>Community partners</strong> <%= @project_instance.community_partners %></p>
+<% end %>
 
+<% if @project_instance.tags.count > 0 %>
+  <p>
+    <strong> Tags: </strong> <% @project_instance.tags.each do |t| %>
+          <%= link_to t.tag_name, controller: "projects", action: "display_tag", id: t.id %>, 
+    <%end%> 
+  </p>
+<% end %>
+
+<hr>
+<h3> Implementation Details </h3>
+<% if @project_instance.materials_and_costs.present? %>
+  <h4> Materials and Costs </h4>
+  <p> <%= @project_instance.materials_and_costs %> </p>
+<% end %>
+
+<% if @project_instance.learning_goals.present? %>
+  <h4> Learning Goals </h4>
+  <p> <%= @project_instance.learning_goals %> </p>
+<% end %>
+
+<% if @project_instance.steps.present? %>
+  <h4> Steps </h4>
+  <p> <%= @project_instance.steps %> </p>
+<% end %>
+
+<% if @project_instance.preparation.present? || @project_instance.other_preparation.present? %>
+  <h4> Preparation </h4>
+  <% if @project_instance.preparation.present?  %>
+    <p> <strong> The following steps were performed in preparation: </strong> </p>
+    <p><%= @project_instance.preparation %> </p>
+  <% end %>
+  <% if @project_instance.other_preparation.present?  %>
+    <p> <strong> Preparation Notes: </strong> </p>
+    <p><%= @project_instance.other_preparation %> </p>
+  <% end %>
+<% end %>
+
+<% if @project_instance.reflection_activities.present? || @project_instance.other_reflection_activities.present? %>
+  <h4> Reflection Activities </h4>
+  <% if @project_instance.reflection_activities.present?  %>
+    <p> <strong> The following steps were performed in conclusion: </strong> </p>
+    <p><%= @project_instance.reflection_activities %> </p>
+  <% end %>
+  <% if @project_instance.other_reflection_activities.present?  %>
+    <p> <strong> Reflection Notes: </strong> </p>
+    <p><%= @project_instance.other_reflection_activities %> </p>
+  <% end %>
+<% end %>
+
+<hr>
+  
+
+<h3> Overall Ratings </h3>
+<% r = @project_instance.rating_aggregate %>
+
+<% if r.rating != nil %>
+  <p><strong>Overall Rating:</strong> <%= render "stars", :rating => r.rating.round %></p>
+<% end %>
+
+<% if r.feasibility != nil %>
+  <p><strong>Feasibility:</strong> <%= render "stars", :rating => r.feasibility.round %></p>
+<% end %>
+
+<% if r.learning_effectiveness != nil %>
+  <p><strong>Achieved Learning Goals:</strong> <%= render "stars", :rating => r.learning_effectiveness.round %></p>
+<% end %>
+
+<% if r.learning_score != nil %>
+  <p><strong>Student Learning Score:</strong> <%= render "stars", :rating => r.learning_score.round %></p>
+<% end %>
+  
+<% if r.planning_score != nil %>
+  <p><strong>Student involvement in planning:</strong> <%= render "stars", :rating => r.planning_score.round %></p>
+<% end %>
+
+<% if r.students_future_projects != nil %>
+  <p><strong>Would students participate again:</strong> <%= render "stars", :rating => r.students_future_projects.round %></p>
+<% end %>
+
+<% if r.impact != nil %>
+  <p><strong>Community Impact:</strong> <%= render "stars", :rating => r.impact.round %></p>
+<% end %>
+
+<% if r.org_future_projects != nil %>
+  <p><strong>Would Community Partners participate again:</strong> <%= render "stars", :rating => r.org_future_projects.round %></p></div>
+<% end %>
+</td>
+<td valign="top" class = "rightTable">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" class="active"><a href="#teacher" aria-controls="teacher" role="tab" data-toggle="tab">Teacher Reviews</a></li>
@@ -101,7 +153,7 @@
           <%= render "reviewsList", :reviews => @teacher_reviews %>
           </div>
         <% end %>
-        <% if admin_signed_in? || user_signed_in %>
+        <% if admin_signed_in? || user_signed_in? %>
         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createTeacherReview">
           Review this Project
         </button>
@@ -118,7 +170,7 @@
           <%= render "reviewsList", :reviews => @student_reviews %>
           </div>
         <% end %> 
-        <% if admin_signed_in? || user_signed_in %>
+        <% if admin_signed_in? || user_signed_in? %>
         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createStudentReview">
          Review this Project
        </button>
@@ -135,7 +187,7 @@
         <%= render "reviewsList", :reviews => @organization_reviews %>
         </div>
       <% end %>
-      <% if admin_signed_in? || user_signed_in %>  	
+      <% if admin_signed_in? || user_signed_in? %>  	
       <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createOrganizationReview">
        Review this Project
      </button>
@@ -185,3 +237,5 @@
     </div>
   </div>
 </div>
+</td>
+</table>

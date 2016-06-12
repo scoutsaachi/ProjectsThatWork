@@ -1,6 +1,9 @@
 class DashboardController < ApplicationController
   before_filter :authorize_admin!
 
+  def index
+  end
+
   def display
   	@users = User.where(approved: false)
   end

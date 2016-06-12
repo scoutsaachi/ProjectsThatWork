@@ -17,6 +17,13 @@ class Request < ActiveRecord::Base
 		if pi != nil
 			pi.status = :approved
 			pi.save
+			tags = pi.tags
+			tags.each do |t|
+				if !t.approved
+					t.approved = true
+					t.save
+				end
+			end
 		end
 	end
 

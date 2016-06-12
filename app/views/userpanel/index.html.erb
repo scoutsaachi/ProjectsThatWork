@@ -1,0 +1,116 @@
+<% if @requests.size > 0 %>
+<h2> Approved Projects </h2>
+<% @requests.approved.each do |request| %>
+	<% headingID = "heading" + request.id.to_s %>
+	<% collapseID = "collapse" + request.id.to_s %>
+	<div>
+		<div class="panel panel-default">
+				<div style = "background-color: white" class="panel-heading" role="tab" id = <%= "#{headingID}" %> >
+					<h4>
+					<a data-toggle="collapse" data-parent="#accordion" href=<%= "#"+collapseID %> aria-expanded="false" aria-controls= <%= collapseID %> style = "text-decoration: none;">
+						Request: implementation of <%= request.project_instance.project.project_name %> submitted <%= request.updated_at%>
+					</a>
+					</h4>
+			</div>
+		</div>
+		<div id=<%= collapseID%> class="panel-collapse collapse" role="tabpanel" aria-labelledby=<%= headingID %>>
+		      <div class="panel-body">
+			<!-- Project -->
+				<% if request.project %>
+					  Project: <%= link_to request.project.project_name, controller: "projects", action: "display", id: request.project.id %>
+				<hr>
+			    <% end %>
+
+		    <!-- Project Instance-->
+		    	<br>
+		    	<% if request.project_instance %>
+		    		<% pi = request.project_instance %>
+		    		<% titlestring = "An impelmentation of #{pi.project.project_name}" %>
+					<% titlestring += pi.school.present? ? " by #{pi.school}" : "" %>
+					<% titlestring += pi.town.present? ? " in #{pi.town}" : "" %>
+					<%= titlestring %>
+		    		 <%= link_to titlestring, controller: "projects", action: "display_instance", id: pi.id %>
+					<hr>
+		    	<% end %>
+
+		    </div>
+		</div>
+	</div>
+<% end %>
+
+<h2> Pending Projects </h2>
+<% @requests.pending.each do |request| %>
+	<% headingID = "heading" + request.id.to_s %>
+	<% collapseID = "collapse" + request.id.to_s %>
+	<div>
+		<div class="panel panel-default">
+				<div style = "background-color: white" class="panel-heading" role="tab" id = <%= "#{headingID}" %> >
+					<h4>
+					<a data-toggle="collapse" data-parent="#accordion" href=<%= "#"+collapseID %> aria-expanded="false" aria-controls= <%= collapseID %> style = "text-decoration: none;">
+						Request: implementation of <%= request.project_instance.project.project_name %> submitted <%= request.updated_at%>
+					</a>
+					</h4>
+			</div>
+		</div>
+		<div id=<%= collapseID%> class="panel-collapse collapse" role="tabpanel" aria-labelledby=<%= headingID %>>
+		      <div class="panel-body">
+			<!-- Project -->
+				<% if request.project %>
+					<%= render :partial => "/request/requestProjectDisplay", :locals => {:p => request.project} %>
+				<hr>
+			    <% end %>
+
+		    <!-- Project Instance-->
+		    	<% if request.project_instance %>
+		    		<% pi = request.project_instance %>
+		    		<%= render :partial => "/request/requestInstanceDisplay", :locals => {:pi => pi} %>
+					<hr>
+		    	<% end %>
+
+		    </div>
+		</div>
+	</div>
+<% end %>
+
+<h2> Denied Projects </h2>
+<% @requests.denied.each do |request| %>
+	<% headingID = "heading" + request.id.to_s %>
+	<% collapseID = "collapse" + request.id.to_s %>
+	<div>
+		<div class="panel panel-default">
+				<div style = "background-color: white" class="panel-heading" role="tab" id = <%= "#{headingID}" %> >
+					<h4>
+					<a data-toggle="collapse" data-parent="#accordion" href=<%= "#"+collapseID %> aria-expanded="false" aria-controls= <%= collapseID %> style = "text-decoration: none;">
+						Request: implementation of <%= request.project_instance.project.project_name %> submitted <%= request.updated_at%>
+					</a>
+					</h4>
+					<p>
+						Admin Note: <%= request.message %>
+					</p>
+			</div>
+		</div>
+		<div id=<%= collapseID%> class="panel-collapse collapse" role="tabpanel" aria-labelledby=<%= headingID %>>
+		      <div class="panel-body">
+			<!-- Project -->
+				<% if request.project %>
+					<%= render :partial => "/request/requestProjectDisplay", :locals => {:p => request.project} %>
+				<hr>
+			    <% end %>
+
+		    <!-- Project Instance-->
+		    	<% if request.project_instance %>
+		    		<% pi = request.project_instance %>
+		    		<%= render :partial => "/request/requestInstanceDisplay", :locals => {:pi => pi} %>
+					<hr>
+		    	<% end %>
+
+		    </div>
+		</div>
+	</div>
+<% end %>
+
+
+
+<% else %>
+<h4> You haven't created any projects yet! </h4>
+<% end %>
