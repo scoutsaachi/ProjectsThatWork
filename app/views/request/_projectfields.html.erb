@@ -4,7 +4,7 @@
 	<%= f.input :project_name %>
 	<%= f.input :course_subject %>
 	<%= f.input :description %>
-	<%= f.input :expected_difficulty %>
+	<%= f.input :expected_difficulty, :as => :select, :collection => ["Lower School","Middle School", "High School"] %>
 	<%= f.input :expected_duration%>
 	<%= f.input :categories, :as => :select, :collection => Category.all %>
 <% end %>

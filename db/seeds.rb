@@ -52,6 +52,6 @@ StudentReview.create(rating: 5, review_text: "\"This project is a life changing 
 
 
 
-User.create([{email:"example@gmail.com", password: "projects-that-work", password_confirmation: "projects-that-work"}])
+User.create([{email:"example@gmail.com", password: "projects-that-work", password_confirmation: "projects-that-work", approved: true}])
 
 Admin.create([{email:"ctc.projects.that.work@gmail.com", password:"projects-that-work", password_confirmation:"projects-that-work"}])

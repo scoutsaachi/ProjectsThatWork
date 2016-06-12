@@ -3,7 +3,7 @@
 	<%= pi.input :school %>
 	<%= pi.input :town %>
 	<%= pi.input :course %>
-	<%= pi.input :grade_level %>
+	<%= pi.input :grade_level, :as => :select, :collection => ["Lower School","Middle School", "High School"] %>
 	<%= pi.input :number_of_students %>
 	<%= pi.input :duration %>
 	<%= pi.input :duration_notes %>

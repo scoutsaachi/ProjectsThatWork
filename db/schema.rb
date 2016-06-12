@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20160610172106) do
     t.string   "school"
     t.string   "town"
     t.string   "course"
-    t.integer  "grade_level"
+    t.string   "grade_level"
     t.integer  "number_of_students"
     t.integer  "duration"
     t.string   "duration_notes"
