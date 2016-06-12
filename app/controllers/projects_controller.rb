@@ -61,6 +61,11 @@ class ProjectsController < ApplicationController
       cat_id = params[:category].to_i
       @projects = @projects.includes(:categories).where(categories: {id: cat_id})
     end
+    if params[:tag]
+      tag_id = params[:tag].to_i
+      @projects = @projects.includes(project_instances: [:tags]).where(tags: {id: tag_id})
+    end
+
     if params[:sort_by] == nil
       params[:sort_by] = 1
     end
@@ -85,6 +90,9 @@ class ProjectsController < ApplicationController
     end
     if params[:category] != "-1"
       options[:category] = params[:category]
+    end
+    if params[:tag] != "-1"
+      options[:tag] = params[:tag]
     end
     options[:sort_by] = params[:sort_by]
     redirect_to(options)
